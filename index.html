@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최상님 - 백엔드 개발자 인터랙티브 포트폴리오</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fcfaf8;
+            color: #3e3a37;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .tab-btn.active {
+            background-color: #9a3412;
+            color: #ffffff;
+            border-color: #9a3412;
+        }
+        .acc-content {
+            display: none;
+        }
+        .acc-content.open {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- Chosen Palette: Warm Neutrals & Muted Terracotta (Background: #fcfaf8, Text: #3e3a37, Accents: #9a3412, #fed7aa, #e7e5e4) -->
+    <!-- Application Structure Plan: 이 SPA는 방대한 이력서 텍스트를 인지적 과부하 없이 탐색할 수 있도록 '대시보드형 포트폴리오' 구조로 설계되었습니다. 1) '핵심 요약' 섹션에서 지원자의 정체성을 빠르게 파악하고, 2) '기술 스택 시각화'를 통해 직무 역량을 한눈에 확인하며, 3) '프로젝트 경험' 탭을 통해 두 회사(와트, 한살림)에서의 성과를 선택적으로 깊이 탐색할 수 있습니다. 4) 마지막 '핵심 문제 해결' 섹션은 아코디언 인터랙션을 통해 지원자의 가장 강력한 무기인 트러블슈팅 경험을 스토리텔링 방식으로 전달합니다. 이 구조는 면접관이나 채용 담당자가 원하는 정보를 비선형적으로, 하지만 매우 직관적으로 찾아볼 수 있도록 돕습니다. -->
+    <!-- Visualization & Content Choices: 1. 기술 스택 분포 (Polar Area Chart / Chart.js): 텍스트로 나열된 스킬들을 '백엔드/DB/DevOps' 등 도메인별로 그룹화하여 시각적 비중으로 표현. 지원자의 백엔드 편중 및 풀스택 경험을 직관적으로 보여주기 위함. 2. 탭 기반 프로젝트 내비게이션 (JS/Tailwind): 연대기적 나열 대신 회사별로 묶어 클릭 시 전환되게 함으로써 스크롤 피로도를 줄이고 정보의 모듈화를 달성. 3. 아코디언 기반 트러블슈팅 상세 (JS/Tailwind): 복잡한 기술적 문제(동시성 제어, 3계층 전환 등)를 처음부터 다 보여주지 않고, 사용자가 관심 있는 제목을 클릭할 때만 상세 내용을 펼쳐 보여주어 가독성 극대화. SVG나 Mermaid는 사용하지 않고 유니코드 이모지와 CSS만으로 시각적 위계를 구성. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased selection:bg-orange-200 selection:text-orange-900">
+
+<nav class="sticky top-0 z-50 bg-[#fcfaf8]/90 backdrop-blur-md border-b border-stone-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex-shrink-0 font-bold text-xl tracking-tight text-orange-900">
+                💻 최상님_포트폴리오
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <button onclick="scrollToSection('summary')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">요약</button>
+                <button onclick="scrollToSection('skills')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">기술 스택</button>
+                <button onclick="scrollToSection('experience')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">프로젝트</button>
+                <button onclick="scrollToSection('achievements')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">문제 해결</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+    <section id="summary" class="scroll-mt-24">
+        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100 flex flex-col md:flex-row gap-12 items-center">
+            <div class="flex-1 space-y-6">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-sm font-bold tracking-wide">
+                    5년 차 백엔드 개발자
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight text-stone-800">
+                    최상님 <span class="text-2xl text-stone-500 font-normal">Sangnim Choi</span>
+                </h1>
+                <p class="text-lg text-stone-600 leading-relaxed">
+                    유지보수와 확장을 고려하여 시스템을 구조화하고, 주도적으로 문제를 해결합니다. 요구사항 분석부터 배포까지 엔드투엔드로 서비스를 구축한 경험이 있으며, 레거시 시스템의 아키텍처 개선과 성능 최적화에 강점이 있습니다. 프론트엔드 친화적인 API 설계와 데이터 무결성 확보를 통해 안정적인 서비스를 제공합니다.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <div class="flex items-center gap-2 text-sm font-medium bg-stone-100 px-4 py-2 rounded-lg text-stone-700">
+                        📞 010-3286-5435
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-medium bg-stone-100 px-4 py-2 rounded-lg text-stone-700">
+                        📧 lizzychoi1119@gmail.com
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 w-full bg-stone-50 rounded-2xl p-6 border border-stone-200">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-stone-800">🎯 핵심 역량</h3>
+                <ul class="space-y-4 text-stone-600">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 text-orange-700">✔</span>
+                        <span>요구 분석부터 DB 설계, API 구현, 배포까지 <strong>E2E 전 주기</strong>를 완수한 경험</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 text-orange-700">✔</span>
+                        <span><strong>3계층 아키텍처 전환</strong>과 API 응답 표준화로 레거시 시스템을 현대화한 역량</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 text-orange-700">✔</span>
+                        <span>조건부 UPDATE 동시성 제어와 안전 바인딩으로 <strong>데이터 무결성</strong>을 확보한 경험</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 text-orange-700">✔</span>
+                        <span>JWT 인증(RBAC) 도입 및 <strong>프론트 UI 제어에 맞춘 API 설계</strong> 역량</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1 text-orange-700">✔</span>
+                        <span>APM 트러블슈팅과 <strong>SQL 병목 쿼리 분석</strong>을 통해 서비스 안정성을 확보한 경험</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="scroll-mt-24">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-4 flex items-center gap-2">🛠 기술 스택 분석</h2>
+            <p class="text-stone-600 text-lg">
+                이 섹션은 제가 5년간 실무에서 다뤄온 기술들을 도메인별로 분류하여 보여줍니다. 좌측의 차트는 프로젝트에서 각 기술 영역이 차지했던 비중을 시각화하여, 백엔드 중심의 풀스택 개발 역량을 직관적으로 파악할 수 있도록 돕습니다.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
+            <div class="w-full">
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-stone-500 mt-4">프로젝트 수행 기반 기술 영역별 비중 시각화 (추정치)</p>
+            </div>
+            <div class="space-y-8">
+                <div>
+                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">Backend Core</h4>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">Java</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">Spring Framework</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">eGovFramework</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">Node.js</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">REST API</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">Database & ORM</h4>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">Oracle</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">MSSQL</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">MyBatis</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">iBatis</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">SQL</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">Frontend / View</h4>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">JavaScript</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">JSP</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">jQuery</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">HTML/CSS</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">DevOps & Tools</h4>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">GitLab</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">SVN</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">Jenkins</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">JENNIFER APM</span>
+                        <span class="px-3 py-1 bg-stone-100 border border-stone-200 rounded-md text-stone-700 font-medium">eXERD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="scroll-mt-24">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-4 flex items-center gap-2">🏢 프로젝트 경험</h2>
+            <p class="text-stone-600 text-lg">
+                이 섹션에서는 제가 수행한 주요 프로젝트들을 회사별로 나누어 상세히 탐색할 수 있습니다. 각 회사의 탭을 클릭하여 해당 기간 동안 구축하고 고도화한 개별 서비스들의 목표, 발생했던 문제, 그리고 이를 프로그래밍적으로 어떻게 해결하여 성과를 이뤄냈는지 확인해 보세요.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mb-8 border-b border-stone-200 pb-4">
+            <button onclick="switchCompany('watt')" id="btn-watt" class="tab-btn active px-6 py-3 rounded-xl font-bold text-lg border-2 transition-all shadow-sm">
+                (주)와트 (WATT)
+                <span class="block text-sm font-normal opacity-80 mt-1">2022.10 - 2024.10</span>
+            </button>
+            <button onclick="switchCompany('hansalim')" id="btn-hansalim" class="tab-btn px-6 py-3 rounded-xl font-bold text-lg bg-white text-stone-600 border-2 border-stone-200 hover:border-orange-900 hover:text-orange-900 transition-all shadow-sm">
+                한살림사업연합
+                <span class="block text-sm font-normal opacity-80 mt-1">2019.10 - 2022.04</span>
+            </button>
+        </div>
+
+        <div id="content-watt" class="company-content space-y-6">
+            <!-- 와트 로고 영역 추가 -->
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6 bg-white p-6 rounded-2xl border border-stone-100 shadow-sm">
+                <div class="w-48 h-20 flex items-center justify-center bg-stone-50 rounded-xl border border-stone-200 p-2 overflow-hidden shrink-0">
+                    <img src="watt_logo.png" alt="와트 로고" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display:none;" class="font-bold text-stone-400 text-lg">WATT</span>
+                </div>
+                <div class="text-center md:text-left pt-2">
+                    <h3 class="text-3xl font-bold text-stone-800">(주)와트</h3>
+                    <p class="text-lg text-stone-500 mt-2 font-medium">2022.10 ~ 2024.10 · <span class="italic">백엔드 개발자</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+                    <h3 class="text-2xl font-bold text-stone-800">와트매니저2 신규 백엔드 전체 개발</h3>
+                    <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider w-max">단독 설계/구현</span>
+                </div>
+                <p class="text-stone-500 mb-6 font-mono text-sm">🧰 Java · eGovFramework/Spring · MyBatis · MSSQL · REST API</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-orange-800 font-bold mb-2 flex items-center gap-2">🎯 목표 및 문제</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>관리자 통합 플랫폼을 제로베이스로 구축하고 확장성 확보</li>
+                            <li>기존 Controller-DB 직결로 인한 확장성/테스트 용이성 저하 해결</li>
+                            <li>도메인 간 일관성 부족 및 다중 필터/안전한 정렬 구현 필요</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-emerald-700 font-bold mb-2 flex items-center gap-2">💡 해결 및 성과</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li><strong>3계층 재설계:</strong> Controller-Service-Mapper 분리 및 공통 유틸 모듈화</li>
+                            <li><strong>표준화:</strong> Response 래퍼(SUCCESS/FAIL) 및 공통 페이지네이션 유틸 도입</li>
+                            <li><strong>안전성:</strong> MyBatis 안전 바인딩 전면 적용, 정렬 화이트리스트로 SQL 인젝션 차단</li>
+                            <li><strong>구조화:</strong> 체크리스트 무한 계층 모델링, 작업허가서 트리 JSON 응답 정비</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+                    <h3 class="text-2xl font-bold text-stone-800">출입 신청 시스템 신규 백엔드 개발</h3>
+                    <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider w-max">단독 설계/구현</span>
+                </div>
+                <p class="text-stone-500 mb-6 font-mono text-sm">🧰 Java · eGovFramework/Spring · MyBatis · MSSQL</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-orange-800 font-bold mb-2 flex items-center gap-2">🎯 목표 및 문제</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>본인인증 후 신청/조회 안정화 및 상태 일원화</li>
+                            <li>사용자 포털과 관리자 콘솔 간 명확한 역할/권한 경계 필요</li>
+                            <li>허용된 단계의 상태 전환 규칙 검증 및 안전교육 이수 판정 요구</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-emerald-700 font-bold mb-2 flex items-center gap-2">💡 해결 및 성과</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li><strong>JWT 권한 제어(RBAC):</strong> 토큰에 Role 포함, 클라이언트 UI 동적 제어 규격 제공</li>
+                            <li><strong>엔드포인트 분리:</strong> 사용자(신청/조회)와 관리자(검토/승인) API 분리 및 교차 차단</li>
+                            <li><strong>규칙 일원화:</strong> 허용된 상태 전환만 수행하도록 검증 로직 구현</li>
+                            <li>운영 혼선 감소 및 승인 처리 효율 향상</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+                    <h3 class="text-2xl font-bold text-stone-800">직캠 관리 앱 신규 백엔드 개발</h3>
+                    <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider w-max">단독 설계/구현</span>
+                </div>
+                <p class="text-stone-500 mb-6 font-mono text-sm">🧰 Java · eGovFramework/Spring · MyBatis · MSSQL</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-orange-800 font-bold mb-2 flex items-center gap-2">🎯 목표 및 문제</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>직캠 장비 대여/현장 보고/반납 일관 서비스화</li>
+                            <li>다수 사용자의 동시 대여 요청 시 발생하는 <strong>중복 대여 데이터 무결성</strong> 위험</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-emerald-700 font-bold mb-2 flex items-center gap-2">💡 해결 및 성과</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li><strong>동시성 제어:</strong> 상태 조건을 포함한 <strong>조건부 UPDATE</strong> 기법 도입</li>
+                            <li>UPDATE 실행 후 <strong>영향 행 수(Row Count) 1건 확인</strong>으로 동일 시점 1건 대여 보장</li>
+                            <li>현장 중복 대여 <strong>제로(0) 달성</strong> 및 데이터 무결성 완벽 확보</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-hansalim" class="company-content space-y-6" style="display: none;">
+            <!-- 한살림 로고 영역 추가 -->
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6 bg-white p-6 rounded-2xl border border-stone-100 shadow-sm">
+                <div class="w-48 h-20 flex items-center justify-center bg-stone-50 rounded-xl border border-stone-200 p-2 overflow-hidden shrink-0">
+                    <img src="hansalim_logo.png" alt="한살림 로고" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display:none;" class="font-bold text-stone-400 text-lg">한살림</span>
+                </div>
+                <div class="text-center md:text-left pt-2">
+                    <h3 class="text-3xl font-bold text-stone-800">한살림사업연합</h3>
+                    <p class="text-lg text-stone-500 mt-2 font-medium">2019.10 ~ 2022.04 · <span class="italic">풀스택 개발자</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+                    <h3 class="text-2xl font-bold text-stone-800">차세대 결제(PG) 전면 개편</h3>
+                    <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider w-max">E2E 완수</span>
+                </div>
+                <p class="text-stone-500 mb-6 font-mono text-sm">🧰 Java · Spring · Oracle · iBatis · JSP/JS · REST API</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-orange-800 font-bold mb-2 flex items-center gap-2">🎯 목표 및 문제</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>기존 결제 모듈을 신규 PG로 서비스 중단 최소화하여 전환</li>
+                            <li>기존 필드 체계와 신규 PG 스펙 차이 대응</li>
+                            <li>카드/가상계좌 흐름의 다양한 경계값 및 예외 상황 처리</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-emerald-700 font-bold mb-2 flex items-center gap-2">💡 해결 및 성과</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>사내 Map 기반 교환 구조에 맞춘 데이터 매핑 설계</li>
+                            <li>토큰 API 연동 (승인/취소/입금통지) 및 전 채널 시나리오 테스트(금액 불일치 등)</li>
+                            <li>부분 병행 운영을 거쳐 서비스 중단 없이 안정적 전환 성공</li>
+                            <li>운영 화면 공통 패턴(페이징/검색/엑셀) 적용으로 관리 효율 증대</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+                    <h3 class="text-2xl font-bold text-stone-800">조합원 ERP 시스템 개발·운영</h3>
+                    <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider w-max">백오피스 고도화</span>
+                </div>
+                <p class="text-stone-500 mb-6 font-mono text-sm">🧰 Java · Spring · Oracle · iBatis · JENNIFER APM</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-orange-800 font-bold mb-2 flex items-center gap-2">🎯 목표 및 문제</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>가입부터 제명, 자금성 항목에 이르는 넓은 도메인 통합</li>
+                            <li>대용량 데이터 조회 및 복잡한 정기 CMS 처리 로직</li>
+                            <li>현업의 즉각적인 원장/분석 리포트 요구 대응 지연</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-emerald-700 font-bold mb-2 flex items-center gap-2">💡 해결 및 성과</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm leading-relaxed">
+                            <li>조합원 전 영역 화면 및 API 구현 (결제정보, 자금성 포인트/쿠폰 등)</li>
+                            <li>반복 요청용 쿼리 템플릿 도입으로 대용량 데이터 리포트 리드타임 대폭 단축</li>
+                            <li><strong>JENNIFER APM 트러블슈팅:</strong> 실시간 트랜잭션 추적 및 병목 쿼리 분석으로 로직 개선</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="scroll-mt-24 pb-24">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-4 flex items-center gap-2">💡 핵심 문제 해결 스토리</h2>
+            <p class="text-stone-600 text-lg">
+                이 섹션은 제가 마주했던 가장 도전적인 기술적 이슈들과, 이를 해결해 나간 사고 과정 및 구체적인 Action을 아코디언 형태로 묶어 제공합니다. 질문을 클릭하여 문제의 원인을 파악하고, 아키텍처 개선, 동시성 제어, 성능 프로파일링 등 개발자로서 깊이 있게 고민한 해결 방안을 확인해 보시기 바랍니다.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+
+            <div class="border border-stone-200 rounded-2xl bg-white overflow-hidden shadow-sm">
+                <button onclick="toggleAccordion('acc-1')" class="w-full text-left px-8 py-6 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-sm font-bold text-orange-700 tracking-wider">ARCHITECTURE</span>
+                        <span class="text-xl font-bold text-stone-800">단일 계층(MVC2) 레거시를 3계층 아키텍처로 어떻게 전환했나요?</span>
+                    </div>
+                    <span class="text-2xl text-stone-400">🔽</span>
+                </button>
+                <div id="acc-1" class="acc-content border-t border-stone-100 px-8 py-6 bg-stone-50/50">
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        초기 프로젝트에서는 Controller 내에서 비즈니스 로직과 Statement 방식의 데이터베이스 연동을 모두 직접 처리하고 있었습니다. 이로 인해 코드가 비대해져 유지보수가 어렵고, SQL 인젝션 보안 취약점의 우려가 있었습니다.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        이를 해결하기 위해 <strong>Controller - Service - Mapper의 명확한 3계층 아키텍처</strong>로 전면 전환하는 단독 프로젝트를 기획 및 수행했습니다. 전 구간에 REST API 규약을 정립하였고, MyBatis <code>#{}</code> 바인딩을 적용하여 동적 바인딩의 안전성을 확보했습니다.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed font-medium">
+                        결과적으로 비즈니스 로직과 데이터 접근 로직이 분리되어 코드 중복이 크게 감소하였고, 예기치 못한 사이드 이펙트 발생을 차단하여 운영팀으로부터 유지보수성이 혁신적으로 개선되었다는 평가를 받았습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-stone-200 rounded-2xl bg-white overflow-hidden shadow-sm">
+                <button onclick="toggleAccordion('acc-2')" class="w-full text-left px-8 py-6 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-sm font-bold text-orange-700 tracking-wider">CONCURRENCY & DATA INTEGRITY</span>
+                        <span class="text-xl font-bold text-stone-800">현장에서 발생하는 '중복 대여' 데이터 경합은 어떻게 차단했나요?</span>
+                    </div>
+                    <span class="text-2xl text-stone-400">🔽</span>
+                </button>
+                <div id="acc-2" class="acc-content border-t border-stone-100 px-8 py-6 bg-stone-50/50">
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        다수의 사용자가 거의 동시에 동일한 직캠 장비의 대여 버튼을 누를 경우, 단순 SELECT 후 UPDATE를 진행하는 로직에서는 그 찰나의 틈에 중복 대여 처리가 발생하여 데이터 무결성이 깨지는 심각한 이슈가 발견되었습니다.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        복잡한 락(Lock) 메커니즘을 도입하기 전, 데이터베이스의 기본 특성을 활용한 <strong>조건부 UPDATE</strong> 로직으로 구조를 단순화했습니다. <code>UPDATE 테이블 SET 상태='대여중' WHERE 장비ID = ? AND 상태='대여가능'</code> 형태로 쿼리를 개선하고, 실행 후 <strong>영향을 받은 Row Count가 정확히 1건</strong>일 때만 성공 트랜잭션으로 처리되도록 로직을 수정했습니다.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed font-medium">
+                        이를 통해 동일 시점에 수십 건의 요청이 몰려도 오직 1건만 성공하고 나머지는 정해진 예외 응답(FAIL 규격화)을 내리게 되어 현장에서의 중복 대여 사고를 영구적으로 근절했습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border border-stone-200 rounded-2xl bg-white overflow-hidden shadow-sm">
+                <button onclick="toggleAccordion('acc-3')" class="w-full text-left px-8 py-6 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-sm font-bold text-orange-700 tracking-wider">ERROR TRACKING & MAINTENANCE</span>
+                        <span class="text-xl font-bold text-stone-800">운영 중 발생하는 예상치 못한 오류는 어떻게 추적하고 대처했나요?</span>
+                    </div>
+                    <span class="text-2xl text-stone-400">🔽</span>
+                </button>
+                <div id="acc-3" class="acc-content border-t border-stone-100 px-8 py-6 bg-stone-50/50">
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        한살림 ERP 및 결제 시스템 등 복잡한 비즈니스 로직이 얽힌 환경에서는 운영 중 간헐적인 오류나 예외 상황이 발생하곤 했습니다. 이때 문제의 원인을 감으로 찾기보다는 <strong>JENNIFER APM</strong>을 적극 활용하여 접근했습니다.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        장애나 지연이 발생하면 실시간 트랜잭션을 모니터링하고, 에러가 발생한 정확한 지점과 스택 트레이스를 연동된 SQL 쿼리와 함께 분석했습니다. 확인된 원인을 바탕으로 유관 부서에 신속하게 상황을 리포팅하거나, 직접 수정이 필요한 비즈니스 로직 결함인 경우 즉각적인 코드 패치 및 SQL 수정을 진행했습니다.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed font-medium">
+                        이를 통해 장애 발생 시 원인 파악에 소요되는 리드타임을 최소화하고, 감에 의존하지 않는 정확한 트러블슈팅으로 서비스의 안정성을 체계적으로 유지할 수 있었습니다.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-stone-800 text-stone-400 py-8 border-t border-stone-800 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <p>&copy; 2026 Sangnim Choi. All rights reserved.</p>
+        <div class="flex gap-4">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-white transition-colors">↑ 최상단으로 이동</button>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initSkillChart();
+    });
+
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function switchCompany(companyId) {
+        document.querySelectorAll('.company-content').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.getElementById('content-' + companyId).style.display = 'block';
+
+        document.querySelectorAll('.tab-btn').forEach(function(btn) {
+            btn.classList.remove('bg-orange-800', 'text-white', 'border-orange-800', 'active');
+            btn.classList.add('bg-white', 'text-stone-600', 'border-stone-200');
+        });
+
+        const activeBtn = document.getElementById('btn-' + companyId);
+        activeBtn.classList.remove('bg-white', 'text-stone-600', 'border-stone-200');
+        activeBtn.classList.add('active', 'border-orange-800');
+        activeBtn.style.backgroundColor = '#9a3412';
+        activeBtn.style.color = '#ffffff';
+    }
+
+    function toggleAccordion(id) {
+        const content = document.getElementById(id);
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+        } else {
+            document.querySelectorAll('.acc-content').forEach(function(el) {
+                el.classList.remove('open');
+            });
+            content.classList.add('open');
+        }
+    }
+
+    function initSkillChart() {
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+
+        const data = {
+            labels: ['Backend Core', 'Database & ORM', 'Frontend / View', 'DevOps & Tools'],
+            datasets: [{
+                label: '기술 활용 빈도 및 비중',
+                data: [45, 25, 10, 20],
+                backgroundColor: [
+                    'rgba(154, 52, 18, 0.7)',
+                    'rgba(194, 65, 12, 0.6)',
+                    'rgba(253, 186, 116, 0.6)',
+                    'rgba(168, 162, 158, 0.6)'
+                ],
+                borderWidth: 1,
+                borderColor: '#ffffff'
+            }]
+        };
+
+        const config = {
+            type: 'polarArea',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            color: 'rgba(231, 229, 228, 0.5)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: "'Noto Sans KR', sans-serif",
+                                size: 13
+                            },
+                            color: '#57534e'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(62, 58, 55, 0.9)',
+                        padding: 12,
+                        titleFont: {
+                            family: "'Noto Sans KR', sans-serif",
+                            size: 14
+                        },
+                        bodyFont: {
+                            family: "'Noto Sans KR', sans-serif",
+                            size: 13
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '% 활용';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+    }
+</script>
+</body>
+</html>
