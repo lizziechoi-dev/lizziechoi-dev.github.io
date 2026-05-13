@@ -500,8 +500,18 @@
         initSkillChart();
     });
 
-    function scrollToSection(id) {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+   function scrollToSection(id) {
+        const element = document.getElementById(id);
+        const navHeight = 64;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - navHeight;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
     }
 
     function switchCompany(companyId) {
@@ -532,6 +542,22 @@
             indicator.style.opacity = '0';
         });
 
+        // 4. 선택된 탭 활성화
+        const activeBtn = document.getElementById('btn-' + companyId);
+        if (activeBtn) {
+            const activeTitle = activeBtn.querySelector('.title-text');
+            const activeDate = activeBtn.querySelector('.date-text');
+            const activeIndicator = activeBtn.querySelector('.tab-indicator');
+
+            activeTitle.classList.remove('text-stone-300', 'text-stone-400');
+            activeTitle.classList.add('text-stone-500');
+            
+            activeDate.classList.remove('text-stone-300');
+            activeDate.classList.add('text-stone-500');
+            
+            activeIndicator.style.opacity = '1';
+        }
+
         const activeBtn = document.getElementById('btn-' + companyId);
         activeBtn.querySelector('.title-text').className = 'text-xl font-bold text-orange-900 transition-colors title-text';
         activeBtn.querySelector('.date-text').className = 'text-sm font-medium text-stone-500 mt-1 date-text';
@@ -540,13 +566,16 @@
 
     function toggleAccordion(id) {
         const content = document.getElementById(id);
-        if (content.classList.contains('open')) {
-            content.classList.remove('open');
-        } else {
-            document.querySelectorAll('.acc-content').forEach(function(el) {
-                el.classList.remove('open');
-            });
+        const arrow = content.previousElementSibling.querySelector('.acc-arrow');
+        const isOpen = content.classList.contains('open');
+
+        // 다른 아코디언 닫기
+        document.querySelectorAll('.acc-content').forEach(el => el.classList.remove('open'));
+        document.querySelectorAll('.acc-arrow').forEach(el => el.style.transform = 'rotate(0deg)');
+
+        if (!isOpen) {
             content.classList.add('open');
+            arrow.style.transform = 'rotate(180deg)';
         }
     }
 
