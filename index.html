@@ -505,15 +505,31 @@
     }
 
     function switchCompany(companyId) {
-        document.querySelectorAll('.company-content').forEach(function(el) {
+        // 1. 모든 컨텐츠 숨기기
+        document.querySelectorAll('.company-content').forEach(el => {
             el.style.display = 'none';
         });
-        document.getElementById('content-' + companyId).style.display = 'block';
+        
+        // 2. 선택한 컨텐츠 보이기
+        const targetContent = document.getElementById('content-' + companyId);
+        if (targetContent) {
+            targetContent.style.display = 'block';
+        }
 
-        document.querySelectorAll('.tab-btn').forEach(function(btn) {
-            btn.querySelector('.title-text').className = 'text-xl font-bold text-stone-400 group-hover:text-stone-600 transition-colors title-text';
-            btn.querySelector('.date-text').className = 'text-sm font-medium text-stone-400 mt-1 date-text';
-            btn.querySelector('.tab-indicator').className = 'tab-indicator absolute -bottom-[1px] left-0 w-full h-[2px] bg-transparent transition-all';
+        // 3. 모든 탭 버튼 초기화 (classList 사용으로 안전하게 교체)
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            const titleText = btn.querySelector('.title-text');
+            const dateText = btn.querySelector('.date-text');
+            const indicator = btn.querySelector('.tab-indicator');
+
+            // 비활성 상태 클래스 적용
+            titleText.classList.remove('text-stone-500');
+            titleText.classList.add('text-stone-300');
+            
+            dateText.classList.remove('text-stone-500');
+            dateText.classList.add('text-stone-300');
+            
+            indicator.style.opacity = '0';
         });
 
         const activeBtn = document.getElementById('btn-' + companyId);
