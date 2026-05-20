@@ -423,7 +423,7 @@
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">복잡한 분산 락(Lock) 도입 전, DB의 원자적 특성을 활용한 조건부 UPDATE(Conditional Update) 로직으로 구조를 효율화했습니다. <code>WHERE 상태='대여가능'</code> 조건을 쿼리에 포함하고, 영향 행 수(Affected Rows)가 정확히 1건일 때만 성공으로 처리하는 검증 프로세스를 구축했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">데이터베이스의 원자적 특성을 활용한 조건부 UPDATE(Conditional Update) 로직으로 동시성 제어 구조를 효율화했습니다. '대여가능' 상태 조건을 쿼리에 포함하고, 영향 행 수(Affected Rows)가 1건일 때만 성공으로 처리하는 검증 프로세스를 구축하여 데이터 정합성을 확보했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
