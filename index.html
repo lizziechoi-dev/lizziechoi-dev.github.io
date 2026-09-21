@@ -421,7 +421,7 @@
                             <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> JWT에 사용자/관리자 구분 정보를 포함하여 화면 구성에 활용할 수 있도록 처리</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 출입 상태 변경 시 서버에서 현재 상태를 다시 확인하고 허용된 변경만 처리</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 안전교육 영상 시청 시간을 서버에 저장하고 완료 요청 시 누적 시간을 확인하여 이수 여부 처리</li>
+                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 서버 시간 기준으로 안전교육 이수 가능 시각을 계산하고 이수 여부 처리</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 이수 완료 후 서버 시간을 기준으로 교육 만료일 계산</li>
                             </ul>
                         </div>
@@ -635,7 +635,7 @@
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">영상 시청 중 프론트엔드에서 일정 주기로 시청 시간을 서버에 전달하면 사용자별 진행 시간을 저장했습니다. 이수 완료 요청 시 서버에 저장된 시청 시간을 조회하여 이수 처리에 활용하고, 완료된 교육은 서버 시간을 기준으로 만료일을 계산했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">프론트엔드에서 시청 신호를 전달하면 서버 시간을 기준으로 시청 시점을 저장하고, 교육시간을 반영한 이수 가능 시각을 미리 계산해 저장했습니다. 이후 요청 시 서버 현재 시간과 이수 가능 시각을 비교하여 기준 시간이 지난 경우 이수 완료 상태를 반환했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
