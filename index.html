@@ -541,8 +541,8 @@
             <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
                 <button onclick="toggleAccordion('acc-1')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
                     <div class="flex flex-col gap-2">
-                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">ARCHITECTURE</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">로직 파편화된 MVC2 구조를 어떻게 비즈니스 중심의 3계층 아키텍처로 탈바꿈했나요?</span>
+                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">DATA RELATIONSHIP</span>
+                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">계층형 데이터를 복사할 때 새로 발급되는 PK로 인해 부모·자식 관계가 깨지는 문제를 어떻게 해결했나요?</span>
                     </div>
                     <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
                 </button>
@@ -550,15 +550,15 @@
                     <div class="px-12 py-12 space-y-10">
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">초기 프로젝트는 Controller 내에서 비즈니스 로직과 SQL 연동이 혼재된 구조였습니다. 코드가 비대해짐에 따라 유지보수 생산성이 저하되었고, 정적 바인딩(Statement) 방식의 데이터 접근으로 인한 SQL 인젝션 보안 취약점 우려가 있었습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">템플릿의 부모·자식 데이터를 함께 복사하면 Auto Increment로 새로운 PK가 발급됩니다. 이 때문에 자식 데이터가 기존 부모 PK를 그대로 참조하면 복사된 데이터의 계층 관계가 깨지는 문제가 있었습니다.</p>
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">로직 파편화 해결을 위해 Controller-Service-Mapper 3계층 아키텍처로 전면 재설계를 주도했습니다. REST API 규약을 정립하고 MyBatis 바인딩을 표준화하여 보안성을 강화했으며, 동적 쿼리를 적용해 코드 유지보수성과 API 안정성을 확보했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">복사 전의 ID를 별도로 보관하고, 데이터 복사 후 기존 ID와 새로 발급된 ID를 매핑했습니다. 이후 자식 데이터가 참조하는 부모 ID를 매핑된 신규 부모 PK로 변경하여 복사본끼리 연결되도록 처리했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"데이터 접근 계층 분리를 통해 코드 중복을 획기적으로 줄였으며, 운영 유지보수 리드타임을 대폭 단축하여 시스템 확장성을 확보했습니다."</p>
+                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"복사된 데이터에서도 기존 템플릿의 부모·자식 관계가 유지되도록 구현했습니다."</p>
                         </div>
                     </div>
                 </div>
@@ -569,7 +569,7 @@
                 <button onclick="toggleAccordion('acc-2')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
                     <div class="flex flex-col gap-2">
                         <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">CONCURRENCY & INTEGRITY</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">현장에서 발생하는 '중복 대여' 데이터 경합은 어떻게 차단했나요?</span>
+                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">여러 사용자가 같은 장비를 동시에 대여하려는 요청을 어떻게 처리했나요?</span>
                     </div>
                     <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
                 </button>
@@ -577,15 +577,15 @@
                     <div class="px-12 py-12 space-y-10">
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">다수 사용자가 동일 장비에 동시 대여 요청을 보낼 경우, '조회 후 수정(SELECT-then-UPDATE)' 방식으로는 찰나의 시차로 인해 중복 대여가 발생하는 데이터 무결성 이슈를 식별했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">여러 사용자가 동일한 장비를 거의 동시에 대여할 경우, 상태를 먼저 조회한 뒤 변경하는 방식에서는 두 요청 모두 대여 가능하다고 판단할 수 있었습니다.</p>
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">데이터베이스의 원자적 특성을 활용한 조건부 UPDATE(Conditional Update) 로직으로 동시성 제어 구조를 효율화했습니다. '대여가능' 상태 조건을 쿼리에 포함하고, 영향 행 수(Affected Rows)가 1건일 때만 성공으로 처리하는 검증 프로세스를 구축하여 데이터 정합성을 확보했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">대여 가능한 상태일 때만 상태가 변경되도록 UPDATE문의 조건에 현재 상태를 포함했습니다. 이후 실제 변경된 행 수를 확인하여 1건이면 대여 성공, 0건이면 다른 요청이 먼저 처리된 것으로 판단했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"수십 건의 동시 요청 환경에서도 데이터 정합성을 100% 보장했으며, 현장 중복 대여 사고를 영구적으로 근절하여 서비스 신뢰도를 극대화했습니다."</p>
+                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"별도의 애플리케이션 락을 구현하지 않고 조건부 UPDATE와 영향 행 수 확인을 통해 동일 장비에 대한 동시 대여 요청을 처리했습니다."</p>
                         </div>
                     </div>
                 </div>
@@ -595,8 +595,8 @@
             <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
                 <button onclick="toggleAccordion('acc-3')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
                     <div class="flex flex-col gap-2">
-                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">ERROR TRACKING</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">운영 중 발생하는 예상치 못한 오류는 어떻게 추적하고 대처했나요?</span>
+                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">MEDIA PROCESSING</span>
+                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">이미지·영상·PDF 업로드와 썸네일 생성 과정에서 파일 처리와 서버 자원을 어떻게 관리했나요?</span>
                     </div>
                     <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
                 </button>
@@ -604,15 +604,42 @@
                     <div class="px-12 py-12 space-y-10">
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">ERP 및 결제 시스템 등 대규모 트래픽과 복잡한 로직이 얽힌 환경에서는 장애 발생 시 원인을 '감'으로 파악하기 어려워 신속한 대응에 한계가 있었습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">기존 메모 기능에 이미지, 동영상, PDF 첨부 기능을 추가하면서 파일별 썸네일 처리가 필요했습니다. 특히 아이폰에서 업로드되는 HEVC 영상은 웹 환경에서 바로 사용하기 어려웠고, 영상 변환 과정에서 원본과 임시 파일이 계속 쌓일 수 있는 문제도 있었습니다.</p>
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">단순 로그 분석을 넘어 JENNIFER APM 기반의 실시간 모니터링 체계를 적극 활용했습니다. 지연 발생 시 스택 트레이스와 연동된 SQL 실행 계획을 분석하여 병목 구간을 정확히 식별하고 조치했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">PDF는 PDFBox, 동영상은 JCodec 등을 이용해 썸네일을 생성했고, HEVC 영상은 FFmpeg를 호출해 H.264 형식으로 변환했습니다. 인코딩이 완료되면 원본 파일을 바로 삭제했으며, 오류 등으로 남은 임시 파일은 3시간 주기의 스케줄러로 정리했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"원인 분석 리드타임을 최소화하고 데이터 기반의 정밀 트러블슈팅을 정착시켜, 서비스 중단 시간을 최소화하고 운영 안정성을 체계적으로 강화했습니다."</p>
+                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"이미지·영상·PDF를 하나의 메모 기능에서 처리할 수 있도록 구현하고, 영상 변환 후 원본 및 임시 파일이 서버에 계속 쌓이지 않도록 관리했습니다."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 4 -->
+            <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
+                <button onclick="toggleAccordion('acc-3')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
+                    <div class="flex flex-col gap-2">
+                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">EDUCATION PROGRESS</span>
+                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">안전교육 영상의 시청 진행 상태와 이수 정보를 어떻게 관리했나요?</span>
+                    </div>
+                    <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
+                </button>
+                <div id="acc-3" class="acc-content border-t border-stone-100 bg-stone-50/30">
+                    <div class="px-12 py-12 space-y-10">
+                        <div>
+                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">안전교육 영상을 일정 시간 이상 시청했는지 관리해야 했고, 프론트 화면의 상태만으로 처리하지 않고 사용자별 시청 진행 상태를 서버에 보관할 필요가 있었습니다.</p>
+                        </div>
+                        <div>
+                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">영상 시청 중 프론트엔드에서 일정 주기로 시청 시간을 서버에 전달하면 사용자별 진행 시간을 저장했습니다. 이수 완료 요청 시 서버에 저장된 시청 시간을 조회하여 이수 처리에 활용하고, 완료된 교육은 서버 시간을 기준으로 만료일을 계산했습니다.</p>
+                        </div>
+                        <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
+                            <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
+                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"교육 시청 진행 상태와 이수 정보를 서버 데이터 기준으로 관리하고, 이수 완료 이후의 교육 유효기간까지 함께 처리했습니다."</p>
                         </div>
                     </div>
                 </div>
