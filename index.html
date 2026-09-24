@@ -241,30 +241,31 @@
 
                 <div>
                     <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        PG 전환 과정에서 결제 API 연동·데이터 매핑·시나리오 테스트 수행
+                        PG 전환 과정에서 결제 API 연동·데이터 매핑·QA 및 시나리오 테스트 수행
                     </strong>
-
+                
                     <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
                         <li class="flex items-start gap-2">
                             <span class="text-stone-300 shrink-0">•</span>
                             <span>
-                                외부 PG사의 API 규격에 맞춰 기존 시스템의 결제 데이터를 매핑하고
-                                빌링키(토큰)와 가상계좌 API를 연동했습니다.
+                                외부 PG사의 API 규격에 맞춰 기존 시스템의 결제 데이터를 매핑하고,
+                                빌링키 관련 API와 가상계좌 발급·입금 통보, 승인·취소 API를 연동했습니다.
                             </span>
                         </li>
-
+                
                         <li class="flex items-start gap-2">
                             <span class="text-stone-300 shrink-0">•</span>
                             <span>
-                                거래번호와 결제 상태값을 확인하여 이미 처리된 결제의 중복 요청 여부를 확인하고,
-                                가상계좌 입금액 불일치 등의 예외 상황을 처리했습니다.
+                                시스템 전환 전 승인·취소·가상계좌 입금 등 결제 시나리오별 QA를 수행하며
+                                결제 결과와 상태가 정상적으로 반영되는지 확인하고,
+                                초과·부족 입금 등 예외 케이스를 검증했습니다.
                             </span>
                         </li>
-
+                
                         <li class="flex items-start gap-2">
                             <span class="text-stone-300 shrink-0">•</span>
                             <span>
-                                결제 시나리오별 테스트를 수행하고
+                                QA와 시나리오 테스트 결과를 바탕으로
                                 계획된 점검 시간 내 신규 PG 시스템 전환을 완료했습니다.
                             </span>
                         </li>
@@ -420,7 +421,6 @@
                             <h4 class="text-emerald-700 font-black flex items-center gap-2 text-sm uppercase tracking-widest">Action & Result</h4>
                             <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> JWT에 사용자/관리자 구분 정보를 포함하여 화면 구성에 활용할 수 있도록 처리</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 출입 상태 변경 시 서버에서 현재 상태를 다시 확인하고 허용된 변경만 처리</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 서버 시간 기준으로 안전교육 이수 가능 시각을 계산하고 이수 여부 처리</li>
                             </ul>
                         </div>
@@ -444,7 +444,7 @@
                         <div class="space-y-6">
                             <h4 class="text-emerald-700 font-black text-sm uppercase tracking-widest">Action & Result</h4>
                             <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 직캠 장비 대여·반납 기능 및 일자별 작업허가서 자동 생성 API 개발</li>
+                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 직캠 장비 대여·반납 기능 및 일자별 작업허가서 데이터를 여러 데이터로 조합해 복합 JSON으로 반환하는 API 개발</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 대여 가능 상태일 때만 변경되도록 조건부 UPDATE 적용</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> UPDATE 영향 행 수를 확인하여 먼저 처리된 요청이 있는 경우 이후 요청은 실패하도록 처리</li>
                             </ul>
@@ -479,17 +479,17 @@
                             <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
                                 <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 기존 결제 시스템을 신규 PG사의 API 규격에 맞게 전환</li>
                                 <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 기존 결제 데이터와 신규 PG 데이터 간 매핑 필요</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 빌링키, 가상계좌 등 결제 시나리오별 예외 상황 처리 필요</li>
+                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 승인·취소·가상계좌 입금 등 결제 유형별 정상·예외 시나리오 검증 필요</li>
                             </ul>
                         </div>
                         <div class="space-y-6">
                             <h4 class="text-emerald-700 font-black text-sm uppercase tracking-widest">Action & Result</h4>
                             <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 외부 PG사 API 규격에 맞춰 기존 결제 데이터 매핑</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 빌링키(토큰), 가상계좌, 결제 승인·취소 관련 API 연동</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 결제 관련 관리자 운영 화면 개발</li>
+                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 빌링키 기반 정기결제, 가상계좌 발급·입금 통보, 결제 승인·취소 API 연동</li>
+                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> ERP 내 실무자용 결제 확인 화면 일부 수정·개발</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 거래번호와 결제 상태값을 확인하여 이미 처리된 결제의 중복 요청 여부 확인</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 가상계좌 입금액 불일치 등 예외 상황 처리</li>
+                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 가상계좌 초과·부족 입금 등 예외 케이스 검증</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 결제 시나리오별 테스트 후 계획된 점검 시간 내 신규 PG 시스템 전환</li>
                             </ul>
                         </div>
@@ -516,7 +516,7 @@
                             <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 조합원, 결제, 정기 CMS, 자금관리 관련 API 및 관리자 화면 개발</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 업무 조건에 따라 조회 조건이 달라지는 동적 쿼리 작성 및 데이터 추출 기능 개발</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 기존 사내 리포트 기능을 활용하여 업무에 필요한 조회 및 보고서 출력 기능 추가</li>
+                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 사내 ERP 솔루션을 활용해 실무 업무에 필요한 조회·관리 기능을 개발하고, 일부 업무에는 리포트 출력 기능을 추가</li>
                                 <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> JENNIFER APM의 X-View와 로그를 활용하여 에러 및 지연 트랜잭션 원인 추적</li>
                             </ul>
                         </div>
@@ -607,7 +607,7 @@
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">PDF는 PDFBox, 동영상은 JCodec 등을 이용해 썸네일을 생성했고, HEVC 영상은 FFmpeg를 호출해 H.264 형식으로 변환했습니다. 인코딩이 완료되면 원본 파일을 바로 삭제했으며, 오류 등으로 남은 임시 파일은 3시간 주기의 스케줄러로 정리했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">PDF는 PDFBox, 동영상은 JCodec 등을 이용해 썸네일을 생성했고, HEVC(H.265) 영상은 FFmpeg를 호출해 H.264 코덱의 MP4로 변환했습니다. 인코딩이 완료되면 원본 파일을 바로 삭제했으며, 오류 등으로 남은 임시 파일은 3시간 주기의 스케줄러로 정리했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
