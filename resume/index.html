@@ -1,0 +1,456 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="백엔드 개발자 최상님 이력서" />
+  <title>최상님 | Backend Developer</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <style>
+    :root {
+      --teal: #0f766e;
+      --teal-dark: #0b5f59;
+      --ink: #15202b;
+      --body: #475569;
+      --muted: #94a3b8;
+      --line: #d8e0e7;
+      --soft: #f7f9fa;
+      --soft-teal: #eef8f6;
+      --page: #ffffff;
+      --bg: #f3f6f7;
+      --radius: 12px;
+      --shadow: 0 12px 40px rgba(15, 23, 42, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      font-size: 15px;
+      line-height: 1.68;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    .page {
+      width: min(1040px, calc(100% - 32px));
+      margin: 36px auto;
+      background: var(--page);
+      box-shadow: var(--shadow);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .inner { padding: 48px 58px 54px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 28px;
+    }
+    .name {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+    }
+    .role {
+      margin-top: 12px;
+      color: var(--teal);
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .contact {
+      text-align: right;
+      color: var(--body);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .contact a { text-decoration: none; }
+    .contact a:hover { color: var(--teal); }
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid #b9c9c6;
+      color: var(--teal-dark);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+    .button:hover { background: var(--soft-teal); border-color: var(--teal); }
+    .button.primary { color: #fff; background: var(--teal); border-color: var(--teal); }
+    .button.primary:hover { background: var(--teal-dark); }
+
+    .accent {
+      height: 40px;
+      background: var(--teal);
+      margin: 22px 0 0;
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: 136px minmax(0, 1fr);
+      column-gap: 22px;
+      margin-top: 34px;
+    }
+    .section + .section { margin-top: 38px; }
+    .section-label {
+      color: var(--teal);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+    .section-body {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      min-width: 0;
+    }
+    .profile-copy { margin: 0; color: var(--body); font-size: 15px; line-height: 1.8; }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 4px 16px;
+      margin: 0;
+    }
+    .tech-grid dt { color: var(--teal); font-weight: 750; }
+    .tech-grid dd { margin: 0; color: var(--body); }
+
+    .experience + .experience { margin-top: 28px; padding-top: 24px; border-top: 1px solid #edf1f4; }
+    .experience-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .company {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .company span { color: #526274; font-size: 15px; font-weight: 650; }
+    .period { color: var(--teal); font-weight: 800; font-size: 14px; white-space: nowrap; }
+    .experience-sub { color: #7a8796; font-size: 13px; margin-bottom: 8px; }
+    .bullet-list { padding-left: 18px; margin: 0; color: var(--body); }
+    .bullet-list li { margin: 3px 0; }
+    .bullet-list li::marker { color: #a6b0bb; }
+
+    .projects-wrap {
+      margin-top: 48px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+    .wide-title {
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    .projects { display: grid; gap: 16px; }
+    .project {
+      position: relative;
+      border: 1px solid #dbe3e8;
+      border-left: 4px solid var(--teal);
+      background: #f8fafb;
+      padding: 17px 18px 16px;
+    }
+    .project-head {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 5px;
+    }
+    .project h3 { margin: 0; font-size: 17px; line-height: 1.4; letter-spacing: -.02em; }
+    .project-tag { color: var(--teal); font-size: 12px; font-weight: 800; }
+    .project p { margin: 4px 0; color: var(--body); }
+    .project .detail { padding-left: 16px; margin: 7px 0 6px; color: var(--body); }
+    .project .detail li { margin: 2px 0; }
+    .project .detail li::marker { color: #a6b0bb; }
+    .stack { color: #697788 !important; font-size: 13px; font-weight: 700; letter-spacing: .01em; }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+      border-top: 1px solid var(--line);
+      margin-top: 34px;
+      padding-top: 14px;
+    }
+    .bottom-title {
+      color: var(--teal);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      grid-column: 1 / -1;
+      margin: 0 0 -3px;
+    }
+    .info-block { display: grid; gap: 11px; }
+    .info-item strong { display: block; font-size: 14px; line-height: 1.35; }
+    .info-item span { color: #7a8796; font-size: 12.5px; }
+
+    .portfolio {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+    .portfolio p { margin: 2px 0 0; font-weight: 750; }
+    .portfolio a { text-decoration: none; }
+    .portfolio a:hover { color: var(--teal); }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 19px 58px 22px;
+      color: #a1acb8;
+      border-top: 1px solid #edf1f4;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      body { font-size: 14px; }
+      .page { width: 100%; margin: 0; border-radius: 0; box-shadow: none; }
+      .inner { padding: 30px 22px 40px; }
+      .hero { grid-template-columns: 1fr; gap: 18px; }
+      .contact { text-align: left; }
+      .actions { justify-content: flex-start; }
+      .accent { height: 20px; margin-top: 20px; }
+      .section { grid-template-columns: 1fr; gap: 7px; margin-top: 28px; }
+      .section + .section { margin-top: 32px; }
+      .section-label { font-size: 14px; }
+      .section-body { padding-top: 10px; }
+      .tech-grid { grid-template-columns: 102px minmax(0, 1fr); gap: 6px 12px; }
+      .experience-head { grid-template-columns: 1fr; gap: 4px; }
+      .period { white-space: normal; }
+      .projects-wrap { margin-top: 38px; }
+      .project { padding: 15px 14px; }
+      .bottom-grid { grid-template-columns: 1fr; gap: 18px; }
+      footer { padding: 18px 22px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; margin: 0; box-shadow: none; border-radius: 0; }
+      .actions { display: none; }
+      a { text-decoration: none; }
+      .project { break-inside: avoid; }
+      .experience { break-inside: avoid; }
+      footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <div class="inner">
+      <header class="hero">
+        <div>
+          <h1 class="name">최상님</h1>
+          <div class="role">Backend Developer</div>
+        </div>
+        <div class="contact">
+          <div>010-3286-5435</div>
+          <div><a href="mailto:lizzychoi1119@gmail.com">lizzychoi1119@gmail.com</a></div>
+          <div><a href="https://lizziechoi-dev.github.io/" target="_blank" rel="noopener">lizziechoi-dev.github.io</a></div>
+          <div>경기도 성남시</div>
+          <div class="actions">
+            <a class="button" href="https://lizziechoi-dev.github.io/" target="_blank" rel="noopener">포트폴리오</a>
+          </div>
+        </div>
+      </header>
+      <div class="accent" aria-hidden="true"></div>
+
+      <section class="section" id="profile">
+        <div class="section-label">Profile</div>
+        <div class="section-body">
+          <p class="profile-copy">Java/Spring 기반으로 4년 8개월 동안 ERP 운영, 결제 시스템 전환, 신규 서비스 백엔드 설계·개발을 경험했습니다. 기존 시스템을 빠르게 파악해 기능을 개선하고, 신규 시스템에서는 요구사항 분석부터 DB 설계, API 개발, 배포까지 전 과정을 수행했습니다. 데이터 정합성과 안정적인 동작을 고려한 구현, 운영 이슈의 원인 추적과 협업을 중요하게 생각합니다.</p>
+        </div>
+      </section>
+
+      <section class="section" id="tech">
+        <div class="section-label">Core &amp; Tech</div>
+        <div class="section-body">
+          <dl class="tech-grid">
+            <dt>Backend</dt><dd>Java · Spring Framework · eGovFramework · MyBatis · REST API</dd>
+            <dt>Database</dt><dd>Oracle · MSSQL</dd>
+            <dt>Frontend</dt><dd>JSP · JavaScript · jQuery</dd>
+            <dt>Ops / Tools</dt><dd>JENNIFER APM · Jenkins · GitLab · Postman · Jira · eXERD</dd>
+            <dt>Media / Other</dt><dd>Node.js(유지보수) · FFmpeg · ffprobe · PDFBox · JCodec</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-label">Experience</div>
+        <div class="section-body">
+          <div class="experience">
+            <div class="experience-head">
+              <h2 class="company">주식회사 와트 (WATT) <span>| 연구원 · Backend Developer</span></h2>
+              <div class="period">2022.10 - 2024.10</div>
+            </div>
+            <div class="experience-sub">신규 서비스 백엔드 설계·개발 / 기존 시스템 유지보수</div>
+            <ul class="bullet-list">
+              <li>와트매니저2, 직캠, 출입 신청 시스템의 DB 및 API 설계·개발. 신규 시스템에서 요구사항 분석부터 배포까지 전 과정 수행</li>
+              <li>기존 비즈니스 로직과 DB 접근이 혼재된 구조를 Controller-Service-Mapper로 분리하고 공통 응답·페이지네이션 기능 구현</li>
+              <li>장비 대여 시 상태 조건부 UPDATE와 영향 행 수를 이용해 동일 장비의 동시 대여 요청 처리</li>
+              <li>계층형 데이터 복사 시 기존 ID와 신규 ID를 매핑하여 복사된 데이터의 부모·자식 관계 유지</li>
+              <li>정렬 항목을 비즈니스 로직의 허용 목록으로 검증하고 MyBatis if/choose 동적 쿼리에 정해진 ORDER BY만 적용</li>
+              <li>이미지·영상·PDF 첨부 및 썸네일 기능 개발, HEVC(H.265) 영상을 H.264 코덱의 MP4로 변환하고 변환 원본·오류 잔여 임시파일 정리 처리</li>
+              <li>출입 신청·승인·안전교육 기능 개발. 서버 시간을 기준으로 이수 가능 시각을 계산·저장하고 현재 시간과 비교해 이수 여부 처리</li>
+              <li>DB Trigger 기반 데이터 변경이력 기능 적용 및 Node.js 실시간 영상통화 서비스 유지보수</li>
+            </ul>
+          </div>
+
+          <div class="experience">
+            <div class="experience-head">
+              <h2 class="company">(주)한살림사업연합 <span>| 실무자 · Full-stack Developer</span></h2>
+              <div class="period">2019.10 - 2022.04</div>
+            </div>
+            <div class="experience-sub">조합원 ERP·백오피스 / 장보기 쇼핑몰 / 신규 PG 전환</div>
+            <ul class="bullet-list">
+              <li>조합원 가입·탈퇴, 결제, 정기 CMS, 포인트·쿠폰, 자금관리 관련 API 및 실무자 화면 개발·운영</li>
+              <li>실무자 화면의 다양한 검색 조건을 처리하기 위한 동적 조회 쿼리 작성. 현업 요청 시 Oracle SQL Developer에서 복합 조회 쿼리를 작성해 데이터 추출·제공</li>
+              <li>신규 PG사 API 규격에 맞춰 결제 데이터를 매핑하고, 빌링키 관련 API와 가상계좌 발급·입금 통보, 승인·취소 API 연동</li>
+              <li>승인·취소·가상계좌 입금 등 시나리오별 QA 수행, 결제 상태 반영과 초과·부족 입금 등 예외 케이스 검증 후 계획된 점검 시간 내 신규 PG 전환</li>
+              <li>장보기 쇼핑몰 회원가입 영역의 기존 JSP/JavaScript 화면과 서버 로직 수정·개발, 주문·회원 영역 운영</li>
+              <li>JENNIFER APM X-View와 로그를 활용해 오류 및 지연 트랜잭션 원인 추적</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects-wrap" id="projects">
+        <h2 class="wide-title">Selected Projects</h2>
+        <div class="projects">
+          <article class="project">
+            <div class="project-head">
+              <h3>관리자 통합 플랫폼 - 와트매니저2</h3>
+              <span class="project-tag">백엔드 단독 개발</span>
+            </div>
+            <p>기존 관리자 시스템을 참고해 신규 플랫폼의 DB·API와 백엔드 구조를 설계하고 개발했습니다.</p>
+            <ul class="detail">
+              <li>Controller-Service-Mapper로 역할을 분리하고 Response/ResultEnums 기반 공통 응답과 페이지네이션 구현</li>
+              <li>정렬 항목을 서비스 로직의 허용값으로 검증한 뒤 MyBatis if/choose로 정해진 ORDER BY 구문만 선택</li>
+              <li>계층형 데이터 복사 시 기존 ID → 신규 ID 매핑으로 자식의 부모 참조값을 새 PK로 변경해 관계 유지</li>
+            </ul>
+            <p class="stack">Java · Spring Framework · eGovFramework · MyBatis · MSSQL · REST API</p>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>직캠 장비 관리 앱</h3>
+              <span class="project-tag">동시 요청 처리</span>
+            </div>
+            <p>직캠 장비 대여·반납과 작업허가서 화면에 필요한 여러 데이터를 조합해 복합 JSON으로 반환하는 백엔드를 개발했습니다.</p>
+            <ul class="detail">
+              <li>장비 상태가 ‘대여가능’인 경우에만 상태를 변경하는 조건부 UPDATE 적용</li>
+              <li>UPDATE 영향 행 수가 1이면 대여 성공, 0이면 다른 요청이 먼저 처리된 것으로 판단해 실패 처리</li>
+              <li>작업허가서에 필요한 데이터를 중첩 구조로 조합해 한 번에 반환</li>
+            </ul>
+            <p class="stack">Java · Spring Framework · eGovFramework · MyBatis · MSSQL</p>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>차세대 결제 시스템(PG) 전환</h3>
+              <span class="project-tag">PG API 연동 · 전환 QA</span>
+            </div>
+            <p>기존 결제 시스템을 신규 PG사로 전환하며 결제 데이터 매핑과 API 연동, 전환 QA를 수행했습니다.</p>
+            <ul class="detail">
+              <li>기존 결제정보를 신규 PG사 요청·응답 규격에 맞게 매핑하고 빌링키 관련 API, 가상계좌 발급·입금 통보, 승인·취소 API 연동</li>
+              <li>승인·취소·가상계좌 입금 시나리오별 QA를 수행하며 결제 결과와 상태의 정상 반영 여부 확인</li>
+              <li>초과·부족 입금 등 예외 케이스를 검증하고 계획된 점검 시간 내 신규 PG 시스템 전환</li>
+            </ul>
+            <p class="stack">Java · Spring Framework · Oracle · iBatis · JSP · JavaScript/jQuery</p>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>기존 시스템 미디어 기능 개선</h3>
+              <span class="project-tag">파일 처리 · 운영 안정화</span>
+            </div>
+            <p>기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하고 파일 형식별 썸네일·변환 처리를 구현했습니다.</p>
+            <ul class="detail">
+              <li>PDFBox와 JCodec 등으로 PDF·영상의 썸네일 또는 필요한 프레임 생성</li>
+              <li>아이폰 HEVC(H.265) 영상을 ffprobe로 확인하고 FFmpeg로 H.264 코덱의 MP4로 변환</li>
+              <li>인코딩 성공 후 원본을 삭제하고 오류로 남은 임시파일은 3시간 주기 스케줄러로 정리</li>
+            </ul>
+            <p class="stack">Java · FFmpeg · ffprobe · PDFBox · JCodec</p>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <h3>출입 신청 시스템</h3>
+              <span class="project-tag">서버시간 기반 이수 처리</span>
+            </div>
+            <p>현장 출입 신청, 협력업체 승인, 안전교육 이수 여부를 관리하는 신규 백엔드를 개발했습니다.</p>
+            <ul class="detail">
+              <li>JWT에 사용자/관리자 구분 정보를 포함해 프론트엔드가 역할에 맞는 화면을 구성할 수 있도록 지원</li>
+              <li>상태 변경 요청 시 서버에서 DB의 현재 상태를 확인한 뒤 상태 변경 처리</li>
+              <li>교육 시청 신호가 들어오면 서버 시간을 기준으로 이수 가능 시각을 계산·저장하고, 이후 현재 서버 시간과 비교해 이수 여부 처리</li>
+            </ul>
+            <p class="stack">Java · Spring Framework · eGovFramework · MyBatis · JWT · MSSQL</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="bottom-grid" id="education">
+        <h2 class="bottom-title">Education &amp; Certifications</h2>
+        <div class="info-block">
+          <div class="info-item"><strong>학점은행제 · 컴퓨터공학</strong><span>2012.05 - 2016.02 · 학사 졸업</span></div>
+          <div class="info-item"><strong>협성대학교 · 컴퓨터공학과</strong><span>2010.03 - 2012.03 · 중퇴</span></div>
+          <div class="info-item"><strong>쌍용교육센터</strong><span>2018.11 - 2019.06 · 웹기반 빅데이터 분석 응용 SW 개발자 양성과정</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-item"><strong>SQLD(SQL개발자)</strong><span>2025.06 · 데이터자격검정</span></div>
+          <div class="info-item"><strong>정보처리산업기사</strong><span>2012.06 · 한국산업인력공단</span></div>
+          <div class="info-item"><strong>컴퓨터활용능력 1급</strong><span>2015.08 · 대한상공회의소</span></div>
+        </div>
+      </section>
+
+      <section class="portfolio">
+        <h2 class="wide-title">Portfolio</h2>
+        <p>프로젝트별 상세 구현과 문제 해결 사례 → <a href="https://lizziechoi-dev.github.io/" target="_blank" rel="noopener">https://lizziechoi-dev.github.io/</a></p>
+      </section>
+    </div>
+    <footer>
+      <span>최상님 · Backend Developer</span>
+      <span>Java · Spring · Oracle · MyBatis</span>
+    </footer>
+  </article>
+</body>
+</html>
