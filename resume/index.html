@@ -337,7 +337,7 @@
               <li>장비 대여 시 상태 조건부 UPDATE와 영향 행 수를 이용해 동일 장비의 동시 대여 요청 처리</li>
               <li>계층형 데이터 복사 시 기존 ID와 신규 ID를 매핑하여 복사된 데이터의 부모·자식 관계 유지</li>
               <li>정렬 항목을 비즈니스 로직의 허용 목록으로 검증하고 MyBatis if/choose 동적 쿼리에 정해진 ORDER BY만 적용</li>
-              <li>이미지·영상·PDF 첨부 및 썸네일 기능 개발, HEVC(H.265) 영상을 H.264 코덱의 MP4로 변환하고 변환 원본·오류 잔여 임시파일 정리 처리</li>
+              <li>이미지·영상·PDF 다중 첨부 및 형식별 썸네일 기능 개발, HEVC(H.265) 영상을 H.264 MP4로 변환하고 원본·장기 잔여 임시파일 정리</li>
               <li>출입 신청·승인·안전교육 기능 개발. 서버 시간을 기준으로 이수 가능 시각을 계산·저장하고 현재 시간과 비교해 이수 여부 처리</li>
               <li>DB Trigger 기반 데이터 변경이력 기능 적용 및 Node.js 실시간 영상통화 서비스 유지보수</li>
             </ul>
@@ -412,14 +412,14 @@
           <article class="project">
             <div class="project-head">
               <h3>기존 시스템 미디어 기능 개선</h3>
-              <span class="project-tag">파일 처리 · 운영 안정화</span>
+              <span class="project-tag">파일 처리 및 영상 변환</span>
               <span class="project-period">2022.10 - 2022.12</span>
             </div>
-            <p>기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하고 파일 형식별 썸네일·변환 처리를 구현했습니다.</p>
+            <p>기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하고 파일 형식별 썸네일 및 영상 변환 기능을 구현했습니다.</p>
             <ul class="detail">
-              <li>PDFBox와 JCodec 등으로 PDF·영상의 썸네일 또는 필요한 프레임 생성</li>
-              <li>아이폰 HEVC(H.265) 영상을 ffprobe로 확인하고 FFmpeg로 H.264 코덱의 MP4로 변환</li>
-              <li>인코딩 성공 후 원본을 삭제하고 오류로 남은 임시파일은 3시간 주기 스케줄러로 정리</li>
+              <li>PDFBox로 PDF 첫 페이지를, JCodec으로 영상 첫 프레임을 추출해 썸네일 생성</li>
+              <li>ffprobe로 HEVC(H.265) 코덱을 확인하고 FFmpeg로 H.264 코덱의 MP4로 변환</li>
+              <li>영상 처리 후 원본 파일을 삭제하고, 3시간 이상 지난 임시파일을 정리하도록 구현</li>
             </ul>
             <p class="stack">Java · FFmpeg · ffprobe · PDFBox · JCodec</p>
           </article>
