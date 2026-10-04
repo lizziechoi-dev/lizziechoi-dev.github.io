@@ -592,15 +592,15 @@
                     <div class="px-12 py-12 space-y-10">
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">기존 메모 기능을 이미지·영상·PDF를 여러 개 첨부할 수 있도록 확장하면서, 파일 형식마다 다른 방식의 썸네일 처리가 필요했습니다. 특히 아이폰에서 업로드되는 HEVC(H.265) 영상은 당시 서비스 환경에서 웹 재생 호환성 문제가 있었고, 영상 변환 과정에서 사용한 원본과 임시파일이 서버에 계속 남을 수 있는 문제도 있었습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하면서 파일 형식별 썸네일 처리가 필요했습니다. 또한 아이폰 HEVC(H.265) 영상은 서비스 환경에서 웹 재생 호환성 문제가 있었고, 영상 처리 과정에서 생성된 원본·임시파일의 정리도 필요했습니다.</p>
                         </div>
                         <div>
                             <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">파일 형식에 따라 처리 방식을 나눴습니다. PDF는 PDFBox로 첫 페이지를 이미지로 변환하고, 영상은 JCodec으로 첫 프레임을 추출했으며, 이미지 파일과 함께 공통 크기로 크롭·리사이즈해 썸네일을 생성했습니다. 영상은 ffprobe로 코덱을 확인하고 HEVC(H.265)인 경우 FFmpeg를 이용해 H.264 코덱의 MP4로 변환했습니다. 영상 처리에 사용한 원본 파일은 작업 후 삭제하고, 임시파일은 마지막 수정 시간을 기준으로 3시간 이상 지난 파일을 정리하도록 구현했습니다.</p>
+                            <p class="text-stone-700 leading-relaxed text-lg font-medium">파일 형식에 따라 처리 방식을 분리했습니다. PDF는 PDFBox로 첫 페이지를, 영상은 JCodec으로 첫 프레임을 추출해 공통 크기의 썸네일을 생성했습니다. 영상은 ffprobe로 코덱을 확인하고 HEVC(H.265)인 경우 FFmpeg로 H.264 MP4로 변환했습니다. 변환 완료 후 원본을 삭제하고, 3시간 이상 남아 있는 임시파일은 스케줄러로 정리했습니다.</p>
                         </div>
                         <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
                             <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"하나의 메모에서 이미지·영상·PDF를 함께 첨부하고 파일 형식에 맞는 썸네일을 제공할 수 있도록 기능을 확장했습니다. 또한 HEVC 영상을 서비스 환경에서 사용할 수 있는 H.264 MP4로 변환하고, 처리 후 남는 원본·임시파일까지 정리하는 파일 처리 흐름을 구현했습니다."</p>
+                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"이미지·영상·PDF를 하나의 첨부 기능에서 처리하고 파일 형식에 맞는 썸네일을 제공하도록 개선했습니다. HEVC 영상은 H.264 MP4로 변환해 재생 호환성을 확보하고, 처리 후 남는 원본·임시파일까지 정리하는 흐름을 구성했습니다."</p>
                         </div>
                     </div>
                 </div>
