@@ -184,30 +184,23 @@
 
                 <div>
                     <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        이미지·영상·PDF 다중 첨부와 썸네일·영상 변환 기능 구현
+                        미디어 파일 처리 및 영상 변환
                     </strong>
 
                     <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
                         <li class="flex items-start gap-2">
                             <span class="text-stone-300 shrink-0">•</span>
                             <span>
-                                기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하고, PDF는 첫 페이지, 영상은 첫 프레임을 추출해 공통 크기의 썸네일을 생성했습니다.
+                                이미지·영상·PDF 다중 첨부 기능을 확장하고 PDF 첫 페이지·영상 첫 프레임을 추출해 썸네일을 생성했습니다.
                             </span>
                         </li>
 
                         <li class="flex items-start gap-2">
                             <span class="text-stone-300 shrink-0">•</span>
                             <span>
-                                ffprobe로 아이폰 HEVC(H.265) 영상의 코덱을 확인하고, FFmpeg로 H.264 코덱의 MP4로 변환했습니다.
+                                ffprobe로 HEVC(H.265) 코덱을 확인해 FFmpeg로 H.264 MP4로 변환하고, 처리 후 원본 및 3시간 이상 지난 임시파일을 정리했습니다.
                             </span>
-                        </li>
-
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                영상 처리 후 원본 파일을 삭제하고, 마지막 수정 시간을 기준으로 3시간 이상 지난 임시파일을 정리하도록 구현했습니다.
-                            </span>
-                        </li>                        
+                        </li>                  
                     </ul>
                 </div>
             </div>
@@ -262,17 +255,7 @@
                         <li class="flex items-start gap-2">
                             <span class="text-stone-300 shrink-0">•</span>
                             <span>
-                                시스템 전환 전 승인·취소·가상계좌 입금 등 결제 시나리오별 QA를 수행하며
-                                결제 결과와 상태가 정상적으로 반영되는지 확인하고,
-                                초과·부족 입금 등 예외 케이스를 검증했습니다.
-                            </span>
-                        </li>
-                
-                        <li class="flex items-start gap-2"> 
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                QA와 시나리오 테스트 결과를 바탕으로
-                                계획된 점검 시간 내 신규 PG 시스템 전환을 완료했습니다.
+                                승인·취소·가상계좌 입금 시나리오 QA와 초과·부족 입금 등 예외 케이스를 검증하고 계획된 점검 시간 내 신규 PG 시스템으로 전환했습니다.
                             </span>
                         </li>
                     </ul>
