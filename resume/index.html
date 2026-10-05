@@ -419,7 +419,7 @@
             <ul class="detail">
               <li>PDFBox로 PDF 첫 페이지를, JCodec으로 영상 첫 프레임을 추출해 썸네일 생성</li>
               <li>ffprobe로 HEVC(H.265) 코덱을 확인하고 FFmpeg로 H.264 코덱의 MP4로 변환</li>
-              <li>영상 처리 후 원본 파일을 삭제하고, 3시간 이상 지난 임시파일을 정리하도록 구현</li>
+              <li>영상 처리 후 원본 파일을 삭제하고, 임시파일은 마지막 수정시간을 기준으로 3시간 이상 지난 파일을 정리하도록 구현</li>
             </ul>
             <p class="stack">Java · FFmpeg · ffprobe · PDFBox · JCodec</p>
           </article>
