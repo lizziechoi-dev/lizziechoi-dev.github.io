@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>최상님 - 백엔드 개발자 인터랙티브 포트폴리오</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
@@ -13,20 +12,6 @@
             font-family: 'Noto Sans KR', sans-serif;
             background-color: #fcfaf8;
             color: #3e3a37;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
         }
         .acc-content {
             display: none;
@@ -268,61 +253,80 @@
 </section>
 
     <!-- Tech Stack Section -->
-    <section id="skills" class="scroll-mt-24 space-y-12">
+    <section id="skills" class="scroll-mt-24 space-y-10">
         <div class="text-center space-y-4">
             <h2 class="text-4xl font-black text-stone-900 tracking-tight">기술 스택</h2>
             <p class="text-stone-500 text-lg max-w-3xl mx-auto">
-                지난 4년 8개월간 실무에서 사용한 기술을 영역별로 정리했습니다.
+                실무에서 사용한 기술을 역할과 활용 경험 중심으로 정리했습니다.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
-            <div class="w-full">
-                <div class="chart-container">
-                    <canvas id="skillsChart"></canvas>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
+                <div class="flex items-center justify-between gap-4 mb-4">
+                    <h3 class="text-xl font-black text-stone-800">Backend</h3>
+                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">Core</span>
                 </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">Java</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">Spring Framework</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">eGovFramework</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">REST API</span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-stone-500">
+                    신규 관리자 플랫폼과 출입·장비 관리 서비스의 백엔드 구조, API, 비즈니스 로직을 설계·개발했습니다.
+                </p>
             </div>
-            <div class="space-y-8">
-                <div>
-                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">Backend Core</h4>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Java</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Spring Framework</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">eGovFramework</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Node.js</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">REST API</span>
-                    </div>
+
+            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
+                <div class="flex items-center justify-between gap-4 mb-4">
+                    <h3 class="text-xl font-black text-stone-800">Database</h3>
+                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">Data</span>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">Database & ORM</h4>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Oracle</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">MSSQL</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">MyBatis</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">iBatis</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">SQL</span>
-                    </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Oracle</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">MSSQL</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">MyBatis</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">iBatis</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">SQL</span>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">Frontend / View</h4>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JavaScript</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JSP</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">jQuery</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">HTML/CSS</span>
-                    </div>
+                <p class="mt-4 text-sm leading-relaxed text-stone-500">
+                    동적 조회, 현업 요청 데이터 추출, 계층형 데이터 처리와 운영성 조회 쿼리 작성에 활용했습니다.
+                </p>
+            </div>
+
+            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
+                <div class="flex items-center justify-between gap-4 mb-4">
+                    <h3 class="text-xl font-black text-stone-800">Frontend / View</h3>
+                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">View</span>
                 </div>
-                <div>
-                    <h4 class="text-lg font-bold text-stone-800 mb-3 border-b-2 border-orange-200 pb-2 inline-block">DevOps & Tools</h4>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">GitLab</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">SVN</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Jenkins</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JENNIFER APM</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">eXERD</span>
-                        <span class="px-4 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Postman</span>
-                    </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JSP</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JavaScript</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">jQuery</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">HTML/CSS</span>
                 </div>
+                <p class="mt-4 text-sm leading-relaxed text-stone-500">
+                    ERP·백오피스 실무 화면과 쇼핑몰 회원 영역의 화면 수정·개발 및 유지보수에 사용했습니다.
+                </p>
+            </div>
+
+            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
+                <div class="flex items-center justify-between gap-4 mb-4">
+                    <h3 class="text-xl font-black text-stone-800">DevOps & Tools</h3>
+                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">Operations</span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">GitLab</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">SVN</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Jenkins</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JENNIFER APM</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Postman</span>
+                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">eXERD</span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-stone-500">
+                    형상관리·배포, API 테스트, 운영 중 오류와 지연 트랜잭션 추적에 활용했습니다.
+                </p>
             </div>
         </div>
     </section>
@@ -693,10 +697,6 @@
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        initSkillChart();
-    });
-
     function scrollToSection(id) {
         const element = document.getElementById(id);
         const navHeight = 64;
@@ -772,46 +772,6 @@
         }
     }
 
-    function initSkillChart() {
-        const ctx = document.getElementById('skillsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'polarArea',
-            data: {
-                labels: ['Backend Core', 'Database & ORM', 'Frontend / View', 'DevOps & Tools'],
-                datasets: [{
-                    data: [45, 25, 10, 20],
-                    backgroundColor: [
-                        'rgba(154, 52, 18, 0.7)', // Orange 800 (원래 색상)
-                        'rgba(194, 65, 12, 0.6)', // Orange 700
-                        'rgba(253, 186, 116, 0.6)', // Orange 200
-                        'rgba(168, 162, 158, 0.6)'  // Stone 400
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        ticks: { display: false },
-                        grid: { color: 'rgba(231, 229, 228, 0.5)' }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            font: { family: "'Noto Sans KR', sans-serif", size: 13 },
-                            color: '#57534e'
-                        }
-                    }
-                }
-            }
-        });
-    }
 </script>
 </body>
 </html>
