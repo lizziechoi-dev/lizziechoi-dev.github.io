@@ -207,6 +207,8 @@
     .project .detail li { margin: 2px 0; }
     .project .detail li::marker { color: #a6b0bb; }
     .stack { color: #697788 !important; font-size: 13px; font-weight: 700; letter-spacing: .01em; }
+    .project .stack a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .project .stack a:hover { color: var(--teal-dark); }
 
     .bottom-grid {
       display: grid;
@@ -297,6 +299,7 @@
           <div>경기도 성남시</div>
           <div class="actions">
             <a class="button" href="https://lizziechoi-dev.github.io/" target="_blank" rel="noopener">포트폴리오</a>
+            <a class="button" href="https://github.com/lizziechoi-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
       </header>
@@ -364,6 +367,21 @@
       <section class="projects-wrap" id="projects">
         <h2 class="wide-title">Selected Projects</h2>
         <div class="projects">
+          <article class="project">
+            <div class="project-head">
+              <h3>LLM Prompt Benchmark</h3>
+              <span class="project-tag">프롬프트 비교 실험</span>
+              <span class="project-period">2026.10 - 2026.10</span>
+            </div>
+            <p>Gemini API를 이용해 동일한 고객 문의 테스트셋에 프롬프트 v1/v2를 적용하고 응답 특성을 비교했습니다.</p>
+            <ul class="detail">
+              <li>고객 문의 5개 × 프롬프트 2종의 총 10개 조합을 구성하고 응답시간·토큰 사용량·성공/실패 결과를 CSV로 기록</li>
+              <li>HTTP 429는 재시도 없이 실패 처리, 503은 2초 후 최대 1회 재시도하고 timeout 등 오류는 기록 후 다음 테스트 진행</li>
+              <li>동일 질문의 v1/v2 응답을 비교해, v2의 답변 형식이 더 일정해진 점과 미확인 정보가 일부 남는 한계를 README에 정리</li>
+            </ul>
+            <p class="stack">Python · Gemini REST API · Git/GitHub · <a href="https://github.com/lizziechoi-dev/llm-prompt-benchmark" target="_blank" rel="noopener noreferrer">GitHub 저장소 ↗</a></p>
+          </article>
+
           <article class="project">
             <div class="project-head">
               <h3>출입 신청 시스템</h3>
