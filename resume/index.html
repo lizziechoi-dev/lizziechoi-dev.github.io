@@ -305,159 +305,44 @@
       </header>
       <div class="accent" aria-hidden="true"></div>
 
-      <section class="section" id="profile">
-        <div class="section-label">Profile</div>
-        <div class="section-body">
-          <p class="profile-copy">4년 8개월 동안 Java/Spring/eGovFramework 환경에서 ERP 운영, 결제 시스템 전환, 신규 서비스 백엔드 설계·개발을 경험한 백엔드 개발자입니다. ERP 운영과 PG사 전환 프로젝트를 경험했으며, 신규 시스템에서는 요구사항 분석부터 DB 설계, API 개발, 배포까지 전 과정을 맡아 개발했습니다. 개발할 때는 요구사항을 정확히 이해하고, 기능이 오류 없이 안정적으로 동작하도록 구현하는 것을 중요하게 생각합니다. 빠르게 업무를 파악하고 데이터 정합성을 고려해 설계하며, 함께 문제를 해결할 수 있는 믿을 수 있는 동료 개발자로 성장하고 싶습니다.</p>
-        </div>
-      </section>
+      <section class="section" id="profile"><div class="section-label">Profile</div><div class="section-body">
+        <p class="profile-copy">4년 8개월 동안 Java/Spring 기반 기업 업무 시스템을 개발·운영했습니다. 한살림사업연합에서는 조합원 ERP와 PG 전환을 담당하며 결제 API 연동, Oracle SQL 작성, 운영 오류 분석을 수행했습니다. 와트에서는 관리자 통합 플랫폼·출입 신청·직캠 관리 앱의 신규 백엔드 설계·개발을 전담했습니다. 계층형 데이터 복제 시 PK 관계 복원, 조건부 UPDATE를 활용한 동시 요청 제어, 공통 REST API 개발과 더불어 파일 처리·로깅·프레임워크 기술 환경 개선을 경험했습니다. 데이터 정합성과 안정적인 동작을 중요하게 생각하는 백엔드 개발자입니다.</p></div></section>
+      <section class="section" id="tech"><div class="section-label">Core &amp; Tech</div><div class="section-body">
+        <dl class="tech-grid">
+          <dt>Backend</dt><dd>Java · Spring Framework · eGovFramework · MyBatis · iBatis · REST API</dd>
+          <dt>Database</dt><dd>Oracle · MSSQL</dd>
+          <dt>Frontend</dt><dd>JSP · JavaScript · jQuery</dd>
+          <dt>Build / Ops</dt><dd>Maven · Jenkins · GitLab · SVN · SLF4J · Logback · Lombok · JENNIFER APM</dd>
+          <dt>Media / Other</dt><dd>Node.js(유지보수) · FFmpeg · ffprobe · PDFBox · JCodec</dd>
+        </dl></div></section>
 
-      <section class="section" id="tech">
-        <div class="section-label">Core & Tech</div>
-        <div class="section-body">
-          <dl class="tech-grid">
-            <dt>Backend</dt><dd>Java · Spring Framework · eGovFramework · MyBatis · REST API</dd>
-            <dt>Database</dt><dd>Oracle · MSSQL</dd>
-            <dt>Frontend</dt><dd>JSP · JavaScript · jQuery</dd>
-            <dt>Ops / Tools</dt><dd>JENNIFER APM · Jenkins · GitLab · Postman · Jira · eXERD</dd>
-            <dt>Media / Other</dt><dd>Node.js(유지보수) · FFmpeg · ffprobe · PDFBox · JCodec</dd>
-          </dl>
-        </div>
-      </section>
+      <section class="section" id="experience"><div class="section-label">Experience</div><div class="section-body">
+        <div class="experience"><div class="experience-head"><h2 class="company">주식회사 와트 (WATT) <span>| 연구원 · Backend Developer</span></h2><div class="period">2022.10 - 2024.10</div></div>
+          <div class="experience-sub">신규 백엔드 3종 전담 설계·개발 / 기존 시스템 유지보수 및 기술 환경 개선</div>
+          <ul class="bullet-list">
+            <li>와트매니저2, 출입 신청 시스템, 직캠 관리 앱의 신규 백엔드 구조 설계 및 REST API 개발 전담</li>
+            <li>공통 응답·페이지네이션, MyBatis 동적 SQL 검색·정렬, 계층형 체크리스트 PK 관계 복원 구현</li>
+            <li>조건부 UPDATE와 영향 행 수 검증으로 장비의 중복 대여 방지</li>
+            <li>이미지·영상·PDF 첨부·썸네일, FFmpeg 영상 변환 및 임시파일 정리 기능 개선</li>
+            <li>SLF4J·Logback·Lombok 적용 및 Maven 의존성 충돌 대응을 포함한 eGovFramework 3.x→4.0 마이그레이션 작업(최종 운영 미반영)</li>
+            <li>Node.js 영상통화 서비스 유지보수와 DB 트리거 적용</li>
+          </ul></div>
+        <div class="experience"><div class="experience-head"><h2 class="company">한살림사업연합 <span>| 실무자 · Full-stack Developer</span></h2><div class="period">2019.10 - 2022.04</div></div>
+          <div class="experience-sub">조합원 ERP·쇼핑몰 개발·운영 / 신규 PG 전환</div>
+          <ul class="bullet-list">
+            <li>조합원 가입·탈퇴, 결제, 정기 CMS, 포인트·쿠폰·예치금 등 ERP 관련 API와 JSP 운영 화면 개발</li>
+            <li>Oracle 동적 SQL·복합 조회 쿼리 작성과 현업 요청 데이터 추출</li>
+            <li>결제 데이터 매핑, 빌링키·가상계좌·승인·취소 API 연동, 정상·예외 시나리오 QA 및 시스템 전환 작업 참여</li>
+            <li>장보기 쇼핑몰 회원가입 기능 개선, JENNIFER APM X-View와 로그를 통한 운영 오류·지연 트랜잭션 분석</li>
+          </ul></div></div></section>
 
-      <section class="section" id="experience">
-        <div class="section-label">Experience</div>
-        <div class="section-body">
-          <div class="experience">
-            <div class="experience-head">
-              <h2 class="company">주식회사 와트 (WATT) <span>| 연구원 · Backend Developer <span class="company-desc">· 스마트글라스 산업현장 솔루션 기업</span></span></h2>
-              <div class="period">2022.10 - 2024.10</div>
-            </div>
-            <div class="experience-sub">신규 서비스 백엔드 설계·개발 / 기존 시스템 유지보수</div>
-            <ul class="bullet-list">
-              <li>와트매니저2, 직캠, 출입 신청 시스템의 DB 및 API 설계·개발. 신규 시스템에서 요구사항 분석부터 배포까지 전 과정 수행</li>
-              <li>기존 비즈니스 로직과 DB 접근이 혼재된 구조를 Controller-Service-Mapper로 분리하고 공통 응답·페이지네이션 기능 구현</li>
-              <li>장비 대여 시 상태 조건부 UPDATE와 영향 행 수를 이용해 동일 장비의 동시 대여 요청 처리</li>
-              <li>계층형 데이터 복사 시 기존 ID와 신규 ID를 매핑하여 복사된 데이터의 부모·자식 관계 유지</li>
-              <li>정렬 항목을 비즈니스 로직의 허용 목록으로 검증하고 MyBatis if/choose 동적 쿼리에 정해진 ORDER BY만 적용</li>
-              <li>이미지·영상·PDF 다중 첨부 및 형식별 썸네일 기능 개발, HEVC(H.265) 영상을 H.264 MP4로 변환하고 원본·장기 잔여 임시파일 정리</li>
-              <li>출입 신청·승인·안전교육 기능 개발. 서버 시간을 기준으로 이수 가능 시각을 계산·저장하고 현재 시간과 비교해 이수 여부 처리</li>
-              <li>DB Trigger 기반 데이터 변경이력 기능 적용 및 Node.js 실시간 영상통화 서비스 유지보수</li>
-            </ul>
-          </div>
-
-          <div class="experience">
-            <div class="experience-head">
-              <h2 class="company">(주)한살림사업연합 <span>| 실무자 · Full-stack Developer <span class="company-desc">· 생산자·소비자 직거래 기반 생활협동조합</span></span></h2>
-              <div class="period">2019.10 - 2022.04</div>
-            </div>
-            <div class="experience-sub">조합원 ERP·백오피스 / 장보기 쇼핑몰 / 신규 PG 전환</div>
-            <ul class="bullet-list">
-              <li>조합원 가입·탈퇴, 결제, 정기 CMS, 포인트·쿠폰, 자금관리 관련 API 및 실무자 화면 개발·운영</li>
-              <li>실무자 화면의 다양한 검색 조건을 처리하기 위한 동적 조회 쿼리 작성. 현업 요청 시 Oracle SQL Developer에서 복합 조회 쿼리를 작성해 데이터 추출·제공</li>
-              <li>신규 PG사 API 규격에 맞춰 결제 데이터를 매핑하고, 빌링키 관련 API와 가상계좌 발급·입금 통보, 승인·취소 API 연동</li>
-              <li>승인·취소·가상계좌 입금 등 시나리오별 QA 수행, 결제 상태 반영과 초과·부족 입금 등 예외 케이스 검증 후 계획된 점검 시간 내 신규 PG 전환</li>
-              <li>장보기 쇼핑몰 회원가입 영역의 기존 JSP/JavaScript 화면과 서버 로직 수정·개발, 주문·회원 영역 운영</li>
-              <li>JENNIFER APM X-View와 로그를 활용해 오류 및 지연 트랜잭션 원인 추적</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="projects-wrap" id="projects">
-        <h2 class="wide-title">Selected Projects</h2>
-        <div class="projects">
-          <article class="project">
-            <div class="project-head">
-              <h3>LLM Prompt Benchmark</h3>
-              <span class="project-tag">프롬프트 비교 실험</span>
-              <span class="project-period">2026.10 - 2026.10</span>
-            </div>
-            <p>Gemini API를 이용해 동일한 고객 문의 테스트셋에 프롬프트 v1/v2를 적용하고 응답 특성을 비교했습니다.</p>
-            <ul class="detail">
-              <li>고객 문의 5개 × 프롬프트 2종의 총 10개 조합을 구성하고 응답시간·토큰 사용량·성공/실패 결과를 CSV로 기록</li>
-              <li>HTTP 429는 재시도 없이 실패 처리, 503은 2초 후 최대 1회 재시도하고 timeout 등 오류는 기록 후 다음 테스트 진행</li>
-              <li>동일 질문의 v1/v2 응답을 비교해, v2의 답변 형식이 더 일정해진 점과 미확인 정보가 일부 남는 한계를 README에 정리</li>
-            </ul>
-            <p class="stack">Python · Gemini REST API · Git/GitHub · <a href="https://github.com/lizziechoi-dev/llm-prompt-benchmark" target="_blank" rel="noopener noreferrer">GitHub 저장소 ↗</a></p>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <h3>출입 신청 시스템</h3>
-              <span class="project-tag">서버시간 기반 이수 처리</span>
-              <span class="project-period">2024.05 - 2024.10</span>
-            </div>
-            <p>현장 출입 신청, 협력업체 승인, 안전교육 이수 여부를 관리하는 신규 백엔드를 개발했습니다.</p>
-            <ul class="detail">
-              <li>JWT에 사용자/관리자 구분 정보를 포함해 프론트엔드가 역할에 맞는 화면을 구성할 수 있도록 지원</li>
-              <li>상태 변경 요청 시 서버에서 DB의 현재 상태를 확인한 뒤 상태 변경 처리</li>
-              <li>교육 시청 신호가 들어오면 서버 시간을 기준으로 이수 가능 시각을 계산·저장하고, 이후 현재 서버 시간과 비교해 이수 여부 처리</li>
-            </ul>
-            <p class="stack">Java · Spring Framework · eGovFramework · MyBatis · JWT · MSSQL</p>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <h3>직캠 장비 관리 앱</h3>
-              <span class="project-tag">동시 요청 처리</span>
-              <span class="project-period">2023.11 - 2024.04</span>
-            </div>
-            <p>직캠 장비 대여·반납과 작업허가서 화면에 필요한 여러 데이터를 조합해 복합 JSON으로 반환하는 백엔드를 개발했습니다.</p>
-            <ul class="detail">
-              <li>장비 상태가 ‘대여가능’인 경우에만 상태를 변경하는 조건부 UPDATE 적용</li>
-              <li>UPDATE 영향 행 수가 1이면 대여 성공, 0이면 다른 요청이 먼저 처리된 것으로 판단해 실패 처리</li>
-              <li>작업허가서에 필요한 데이터를 중첩 구조로 조합해 한 번에 반환</li>
-            </ul>
-            <p class="stack">Java · Spring Framework · eGovFramework · MyBatis · MSSQL</p>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <h3>관리자 통합 플랫폼 - 와트매니저2</h3>
-              <span class="project-tag">백엔드 단독 개발</span>
-              <span class="project-period">2023.01 - 2023.10</span>
-            </div>
-            <p>기존 관리자 시스템을 참고해 신규 플랫폼의 DB·API와 백엔드 구조를 설계하고 개발했습니다.</p>
-            <ul class="detail">
-              <li>Controller-Service-Mapper로 역할을 분리하고 Response/ResultEnums 기반 공통 응답과 페이지네이션 구현</li>
-              <li>정렬 항목을 서비스 로직의 허용값으로 검증한 뒤 MyBatis if/choose로 정해진 ORDER BY 구문만 선택</li>
-              <li>계층형 데이터 복사 시 기존 ID → 신규 ID 매핑으로 자식의 부모 참조값을 새 PK로 변경해 관계 유지</li>
-            </ul>
-            <p class="stack">Java · Spring Framework · eGovFramework · MyBatis · MSSQL · REST API</p>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <h3>기존 시스템 미디어 기능 개선</h3>
-              <span class="project-tag">파일 처리 및 영상 변환</span>
-              <span class="project-period">2022.10 - 2022.12</span>
-            </div>
-            <p>기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하고 파일 형식별 썸네일 및 영상 변환 기능을 구현했습니다.</p>
-            <ul class="detail">
-              <li>PDFBox로 PDF 첫 페이지를, JCodec으로 영상 첫 프레임을 추출해 썸네일 생성</li>
-              <li>ffprobe로 HEVC(H.265) 코덱을 확인하고 FFmpeg로 H.264 코덱의 MP4로 변환</li>
-              <li>영상 처리 후 원본 파일을 삭제하고, 임시파일은 마지막 수정시간을 기준으로 3시간 이상 지난 파일을 정리하도록 구현</li>
-            </ul>
-            <p class="stack">Java · FFmpeg · ffprobe · PDFBox · JCodec</p>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <h3>차세대 결제 시스템(PG) 전환</h3>
-              <span class="project-tag">PG API 연동 · 전환 QA</span>
-              <span class="project-period">2019.10 - 2020.08</span>
-            </div>
-            <p>기존 결제 시스템을 신규 PG사로 전환하며 결제 데이터 매핑과 API 연동, 전환 QA를 수행했습니다.</p>
-            <ul class="detail">
-              <li>기존 결제정보를 신규 PG사 요청·응답 규격에 맞게 매핑하고 빌링키 관련 API, 가상계좌 발급·입금 통보, 승인·취소 API 연동</li>
-              <li>승인·취소·가상계좌 입금 시나리오별 QA를 수행하며 결제 결과와 상태의 정상 반영 여부 확인</li>
-              <li>초과·부족 입금 등 예외 케이스를 검증하고 계획된 점검 시간 내 신규 PG 시스템 전환</li>
-            </ul>
-            <p class="stack">Java · Spring Framework · Oracle · iBatis · JSP · JavaScript/jQuery</p>
-          </article>
-        </div>
-      </section>
+      <section class="projects-wrap" id="projects"><h2 class="wide-title">Projects</h2><div class="projects">          <article class="project"><div class="project-head"><h3>직캠 관리 앱 신규 백엔드 개발</h3><span class="project-tag">동시 요청 제어</span><span class="project-period">2023.05 - 2024.10 (고도화 포함)</span></div><p>산업현장 직캠 장비 대여·반납과 작업허가서 조회를 지원하는 신규 앱의 백엔드 전담 개발</p><ul class="detail"><li>대여 가능한 상태에서만 변경하는 조건부 UPDATE 및 영향 행 수 검증으로 중복 대여 방지</li><li>장비 상태 관리 API와 비즈니스 로직 구현</li><li>여러 작업허가서 조회 결과를 중첩 JSON 응답으로 조합</li></ul><p class="stack">Java · Spring · eGovFramework · MyBatis · MSSQL</p></article>
+          <article class="project"><div class="project-head"><h3>출입 신청 시스템 신규 백엔드 개발</h3><span class="project-tag">업무 흐름·서버 시간</span><span class="project-period">2023.03 - 2024.10 (고도화 포함)</span></div><p>현장 출입 신청, 검토·승인·반려와 안전교육 이수 여부를 관리하는 신규 백엔드 전담 개발</p><ul class="detail"><li>신청·검토·승인·반려 단계별 REST API 및 상태 처리 로직 구현</li><li>JWT에 사용자·관리자 구분 정보를 포함하여 프론트엔드 화면 분기에 활용</li><li>서버 시간을 기준으로 교육 이수 가능 시각을 계산·검증해 판정의 신뢰성 확보</li></ul><p class="stack">Java · Spring · eGovFramework · MyBatis · MSSQL · JWT</p></article>
+          <article class="project"><div class="project-head"><h3>와트매니저2 신규 백엔드 개발</h3><span class="project-tag">계층형 데이터·공통 API</span><span class="project-period">2023.01 - 2024.10 (고도화 포함)</span></div><p>회원·디바이스·그룹·체크리스트를 관리하는 관리자 통합 플랫폼 신규 백엔드 전담 개발</p><ul class="detail"><li>Controller–Service–Mapper 구조, 공통 응답 객체·결과 코드·페이지네이션 구현</li><li>회원·디바이스·그룹·자료 API 및 MyBatis 동적 SQL 검색 기능 개발</li><li>계층형 체크리스트 생성·이동·정렬·복제 기능, 기존·신규 PK 매핑으로 부모·자식 관계 유지</li><li>정렬 허용 목록 검증 및 MyBatis 고정 SQL 분기를 통한 동적 정렬 처리</li></ul><p class="stack">Java · Spring · eGovFramework · MyBatis · MSSQL · GitLab · Jenkins</p></article>
+          <article class="project"><div class="project-head"><h3>기존 시스템 유지보수 및 기술 환경 개선</h3><span class="project-tag">미디어·Maven·로깅</span><span class="project-period">2022.10 - 2024.10</span></div><p>기존 서비스의 미디어 기능을 확장하고 로깅·프레임워크 기술 환경 개선과 유지보수 수행</p><ul class="detail"><li>이미지·영상·PDF 다중 첨부와 PDFBox·JCodec 썸네일 생성 기능 개발</li><li>ffprobe 코덱 판별, FFmpeg H.264 MP4 변환, 3시간 경과 임시파일 정리</li><li>SLF4J·Logback 로깅 변경과 Lombok 적용, Node.js 영상통화 유지보수 및 DB 트리거 적용</li><li>eGovFramework 3.x→4.0 단계적 마이그레이션에서 Maven 버전·exclusions로 의존성 충돌 및 설정 호환성 문제 대응(최종 운영 미반영)</li></ul><p class="stack">Java · eGovFramework · Maven · SLF4J · Logback · FFmpeg · Node.js</p></article>
+          <article class="project"><div class="project-head"><h3>조합원 ERP 시스템 개발 및 운영</h3><span class="project-tag">백오피스·Oracle SQL</span><span class="project-period">2019.10 - 2022.04</span></div><p>조합원 정보·결제·정기 CMS·포인트·쿠폰·자금관리 ERP 개발·운영</p><ul class="detail"><li>조합원 가입·탈퇴, 결제, 정기 CMS, 자금관리 API 및 JSP 운영 화면 개발</li><li>현업 요구사항 분석부터 설계·개발·테스트·배포까지 수행</li><li>Oracle·iBatis 동적 SQL과 복합 조회 쿼리 작성, 현업 요청 데이터 추출</li><li>JENNIFER APM X-View와 로그로 오류·지연 트랜잭션 분석 및 대응</li></ul><p class="stack">Java · Spring Framework · Oracle · iBatis · JSP · JavaScript · JENNIFER APM</p></article>
+          <article class="project"><div class="project-head"><h3>차세대 결제(PG) 시스템 전환</h3><span class="project-tag">결제 API·QA</span><span class="project-period">2019.10 - 2020.08</span></div><p>신규 PG사 전환 과정에서 결제 데이터 매핑, 주요 API 연동, 운영 화면 일부 개발과 QA 수행</p><ul class="detail"><li>기존·신규 PG사 결제 데이터 및 API 요청·응답 항목 매핑</li><li>빌링키·가상계좌 발급·입금 통보·승인·취소 API 연동</li><li>ERP 결제 조회 운영 화면 일부 수정·개발 및 정상·예외 시나리오 QA</li><li>가상계좌 초과·부족 입금 검증, 계획된 점검시간 내 전환 참여(전체 프로젝트 기여도 약 20%)</li></ul><p class="stack">Java · Spring Framework · Oracle · iBatis · JSP · JavaScript · Jenkins</p></article>
+          <article class="project"><div class="project-head"><h3>자사 쇼핑몰(장보기) 운영 시스템 개선</h3><span class="project-tag">회원가입·운영 대응</span><span class="project-period">2019.10 - 2020.08</span></div><p>온라인 쇼핑몰 회원가입 기능 개선 및 주문·회원 영역 운영 오류 분석과 유지보수</p><ul class="detail"><li>JSP·JavaScript와 Java/Spring 기반 회원가입 화면·서버 로직 수정·개발</li><li>약관 동의, 아이디·이메일 중복 확인 기능 개선</li><li>운영 문의 대응 및 JENNIFER APM X-View·로그 기반 오류·지연 트랜잭션 추적</li></ul><p class="stack">Java · Spring Framework · Oracle · iBatis · JSP · JavaScript · jQuery</p></article></div></section>
 
       <section class="bottom-grid" id="education">
         <h2 class="bottom-title">Education & Certifications</h2>
@@ -467,7 +352,7 @@
           <div class="info-item"><strong>쌍용교육센터</strong><span>2018.11 - 2019.06 · 웹기반 빅데이터 분석 응용 SW 개발자 양성과정</span></div>
         </div>
         <div class="info-block">
-          <div class="info-item"><strong>SQLD(SQL개발자)</strong><span>2025.06 · 데이터자격검정</span></div>
+          <div class="info-item"><strong>SQLD(SQL개발자)</strong><span>2025.06 · 한국데이터산업진흥원</span></div>
           <div class="info-item"><strong>정보처리산업기사</strong><span>2012.06 · 한국산업인력공단</span></div>
           <div class="info-item"><strong>컴퓨터활용능력 1급</strong><span>2015.08 · 대한상공회의소</span></div>
         </div>
