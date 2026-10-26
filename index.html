@@ -89,6 +89,8 @@
     .tag-list{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:10px;background:white;border:1px solid #d9e7e5;border-radius:5px;color:#49626a;padding:4px 7px;font-weight:700}
     .case-context{border-top:1px solid #e0ebeb;margin-top:16px;padding-top:12px;display:grid;gap:4px;font-size:11px;color:#5d7577}
     .case-context a{display:block;color:var(--teal-dark);font-weight:800}
+    .case-context a:hover{text-decoration:underline;text-underline-offset:3px}
+    .case-link-arrow{font-size:11px;font-weight:500;margin-left:2px}
     .project-caveat{border-left:3px solid #c4a56f;margin:19px 0 0;padding:8px 12px;background:#fff9f0;font-size:12px;color:#775b38}
     .tech-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
     .tech-card{background:white;border:1px solid var(--line);border-radius:12px;padding:25px;min-height:140px}
@@ -170,7 +172,7 @@
   <div class="project-detail">
     <div class="project-meta"><span class="project-type">동시 요청 · 장비 관리</span><span class="project-note">고도화 기간 포함</span></div>
     <p class="project-overview">산업현장의 직캠 장비 대여·반납과 상태 관리, 일자별 작업허가서 데이터 제공을 위한 REST API를 설계·개발했습니다.</p>
-    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>직캠 장비의 대여·반납 및 상태 관리 API와 비즈니스 로직 구현</li><li>대여 가능한 상태인 경우에만 UPDATE하도록 조건을 두고 영향 행 수로 성공 여부 확인</li><li>동일 장비에 대한 중복 대여 방지 로직 구현</li><li>여러 조회 결과를 조합해 작업허가서 데이터를 중첩 JSON 형태로 제공</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-concurrency">동일 장비의 중복 대여 방지</a></div></aside></div>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>직캠 장비의 대여·반납 및 상태 관리 API와 비즈니스 로직 구현</li><li>대여 가능한 상태인 경우에만 UPDATE하도록 조건을 두고 영향 행 수로 성공 여부 확인</li><li>동일 장비에 대한 중복 대여 방지 로직 구현</li><li>여러 조회 결과를 조합해 작업허가서 데이터를 중첩 JSON 형태로 제공</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-concurrency">동일 장비의 중복 대여 방지 <span class="case-link-arrow" aria-hidden="true">→</span></a></div></aside></div>
     
   </div>
 </details>
@@ -179,7 +181,7 @@
   <div class="project-detail">
     <div class="project-meta"><span class="project-type">승인 프로세스 · 서버 시간</span><span class="project-note">고도화 기간 포함</span></div>
     <p class="project-overview">산업현장 출입 신청부터 검토·승인·반려까지 이어지는 업무 프로세스와 안전교육 이수 관리 기능의 백엔드를 설계·개발했습니다.</p>
-    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>출입 신청, 검토, 승인, 반려 단계별 API 및 업무 처리 로직 구현</li><li>JWT에 사용자·관리자 구분 정보를 포함해 프론트엔드의 화면 분기에 활용</li><li>클라이언트 시간이 아닌 서버 시간을 기준으로 안전교육 이수 가능 시각 계산·검증</li><li>업무 단계별 상태 조회 및 처리 기능 구현</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span><span class="tag">JWT</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-education">서버 기준 안전교육 이수 판정</a></div></aside></div>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>출입 신청, 검토, 승인, 반려 단계별 API 및 업무 처리 로직 구현</li><li>JWT에 사용자·관리자 구분 정보를 포함해 프론트엔드의 화면 분기에 활용</li><li>클라이언트 시간이 아닌 서버 시간을 기준으로 안전교육 이수 가능 시각 계산·검증</li><li>업무 단계별 상태 조회 및 처리 기능 구현</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span><span class="tag">JWT</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-education">서버 기준 안전교육 이수 판정 <span class="case-link-arrow" aria-hidden="true">→</span></a></div></aside></div>
     
   </div>
 </details>
@@ -188,7 +190,7 @@
   <div class="project-detail">
     <div class="project-meta"><span class="project-type">백엔드 구조 · 계층형 데이터</span><span class="project-note">고도화 기간 포함</span></div>
     <p class="project-overview">신규 관리자 통합 플랫폼의 백엔드 구조와 REST API, 공통 기능 및 주요 관리 로직을 1인 전담하여 개발했습니다.</p>
-    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>Controller–Service–Mapper 구조와 공통 응답 객체, 결과 코드 및 페이지네이션 구현</li><li>회원, 디바이스, 그룹, 자료 관리 API 및 MyBatis 동적 SQL 기반 검색 기능 개발</li><li>계층형 체크리스트의 생성, 이동, 정렬, 템플릿 복제 기능 구현</li><li>복제 과정의 기존 PK와 신규 PK의 매핑으로 부모·자식 관계 유지</li><li>정렬 허용 목록 검증 및 MyBatis의 고정 SQL 분기로 정렬 처리의 안전성 확보</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span><span class="tag">REST API</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-hierarchy">계층형 체크리스트 관계 유지</a></div></aside></div>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>Controller–Service–Mapper 구조와 공통 응답 객체, 결과 코드 및 페이지네이션 구현</li><li>회원, 디바이스, 그룹, 자료 관리 API 및 MyBatis 동적 SQL 기반 검색 기능 개발</li><li>계층형 체크리스트의 생성, 이동, 정렬, 템플릿 복제 기능 구현</li><li>복제 과정의 기존 PK와 신규 PK의 매핑으로 부모·자식 관계 유지</li><li>정렬 허용 목록 검증 및 MyBatis의 고정 SQL 분기로 정렬 처리의 안전성 확보</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span><span class="tag">REST API</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-hierarchy">계층형 체크리스트 관계 유지 <span class="case-link-arrow" aria-hidden="true">→</span></a></div></aside></div>
     
   </div>
 </details>
@@ -197,7 +199,7 @@
   <div class="project-detail">
     <div class="project-meta"><span class="project-type">미디어 처리 · 기술 환경 개선</span></div>
     <p class="project-overview">기존 시스템에서 이미지·영상·PDF 처리 기능을 개선하고 운영 유지보수 및 기술 환경 개선 업무를 수행했습니다.</p>
-    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>이미지, 영상, PDF 다중 첨부와 PDFBox, JCodec 기반 썸네일 생성</li><li>ffprobe를 통한 코덱 확인, FFmpeg를 통한 HEVC(H.265) 영상의 H.264 MP4 변환</li><li>마지막 수정 시간 기준 3시간 이상 경과한 임시파일 정리 로직 구현</li><li>Log4j 기반 로깅 환경을 SLF4J와 Logback으로 변경하고 Lombok 적용</li><li>eGovFramework 3.x→4.0 단계적 마이그레이션 시 Maven 라이브러리 버전 조정, exclusions 적용 및 설정 호환성 문제 대응</li><li>Node.js 기반 영상통화 서비스 유지보수 및 운영 데이터 변경 이력 관리용 DB 트리거 적용</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>미디어 기능 개선 직접 담당, 기존 시스템 유지보수(초기 백엔드 1인 담당, 이후 1명 합류하여 2인 체제)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">eGovFramework</span><span class="tag">Maven</span><span class="tag">SLF4J</span><span class="tag">Logback</span><span class="tag">FFmpeg</span><span class="tag">ffprobe</span><span class="tag">Node.js</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-dependency">Maven 의존성 충돌 해결</a><a href="#highlight-video">영상 재생 호환성 개선</a></div></aside></div>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>이미지, 영상, PDF 다중 첨부와 PDFBox, JCodec 기반 썸네일 생성</li><li>ffprobe를 통한 코덱 확인, FFmpeg를 통한 HEVC(H.265) 영상의 H.264 MP4 변환</li><li>마지막 수정 시간 기준 3시간 이상 경과한 임시파일 정리 로직 구현</li><li>Log4j 기반 로깅 환경을 SLF4J와 Logback으로 변경하고 Lombok 적용</li><li>eGovFramework 3.x→4.0 단계적 마이그레이션 시 Maven 라이브러리 버전 조정, exclusions 적용 및 설정 호환성 문제 대응</li><li>Node.js 기반 영상통화 서비스 유지보수 및 운영 데이터 변경 이력 관리용 DB 트리거 적용</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>미디어 기능 개선 직접 담당, 기존 시스템 유지보수(초기 백엔드 1인 담당, 이후 1명 합류하여 2인 체제)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">eGovFramework</span><span class="tag">Maven</span><span class="tag">SLF4J</span><span class="tag">Logback</span><span class="tag">FFmpeg</span><span class="tag">ffprobe</span><span class="tag">Node.js</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-dependency">Maven 의존성 충돌 해결 <span class="case-link-arrow" aria-hidden="true">→</span></a><a href="#highlight-video">영상 재생 호환성 개선 <span class="case-link-arrow" aria-hidden="true">→</span></a></div></aside></div>
     <p class="project-caveat"><strong>적용 범위:</strong> 프레임워크 마이그레이션 결과물은 최종 운영 환경에 반영되지 않았습니다.</p>
   </div>
 </details></div></div>
