@@ -1,829 +1,263 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>최상님 - 백엔드 개발자 인터랙티브 포트폴리오</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #fcfaf8;
-            color: #3e3a37;
-        }
-        .acc-content {
-            display: none;
-        }
-        .acc-content.open {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Java/Spring 기반 백엔드 개발자의 실무 프로젝트와 기술 구현 경험. 계층형 데이터, 동시 요청 제어, 시스템 운영 및 개선.">
+  <meta name="theme-color" content="#123e43">
+  <meta property="og:title" content="최상님 | Backend Developer Portfolio">
+  <meta property="og:description" content="기업 업무 시스템의 설계·개발·운영 경험과 기술 구현 사례를 정리한 포트폴리오">
+  <title>최상님 | Backend Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#15363e;--deep:#123e43;--teal:#087a71;--teal-dark:#08645d;--mint:#e7f4f0;--paper:#fff;--bg:#f5f8f8;--muted:#637681;--line:#dfebeb;--shadow:0 18px 56px rgba(11,56,59,.07)}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;color:var(--navy);background:var(--bg);font-family:"Noto Sans KR",Pretendard,"Apple SD Gothic Neo",sans-serif;font-size:15px;line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    :focus-visible{outline:3px solid #0ba79a;outline-offset:3px}
+    .container{max-width:1120px;margin-inline:auto;padding-inline:28px}
+    .site-header{height:75px;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;gap:18px}
+    .brand{font-size:16px;font-weight:900;letter-spacing:-.7px;white-space:nowrap}.brand span{color:var(--teal)}
+    .nav-links{display:flex;align-items:center;gap:23px;font-size:13px;font-weight:700;color:#516875;white-space:nowrap}
+    .nav-links a:hover,.plain-link:hover,.deep-link:hover{color:var(--teal)}
+    .nav-resume{padding:8px 14px;border-radius:99px;border:1px solid #c2dad7;color:var(--teal-dark)}
+    .hero{background:radial-gradient(circle at 84% 16%,rgba(54,163,147,.24),transparent 37%),linear-gradient(126deg,#103b43 2%,#0d5555 100%);color:white;position:relative;overflow:hidden}
+    .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 310px;align-items:center;gap:62px;padding-block:96px 88px}
+    .eyebrow{font-size:12px;font-weight:800;color:#99e2d8;letter-spacing:1.5px}
+    .hero h1{font-size:clamp(30px,4vw,51px);line-height:1.35;letter-spacing:-2px;margin:17px 0 20px;font-weight:900}
+    .hero h1 em{font-style:normal;color:#83dbc7}
+    .hero-lead{font-size:16px;line-height:1.95;color:#d7ebe9;max-width:670px;margin:0}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:29px}
+    .btn{display:inline-flex;gap:9px;align-items:center;justify-content:center;min-height:44px;padding:10px 19px;border-radius:8px;font-size:13px;font-weight:800;transition:background .15s,border-color .15s}
+    .btn-primary{background:#fff;color:var(--deep)}.btn-primary:hover{background:#e6f6f1}
+    .btn-ghost{border:1px solid rgba(255,255,255,.42);color:#fff}.btn-ghost:hover{background:rgba(255,255,255,.10)}
+    .hero-panel{border:1px solid rgba(226,255,248,.22);border-radius:17px;background:rgba(5,45,49,.28);padding:24px;box-shadow:0 18px 50px #062c2e20}
+    .panel-caption{font-size:11px;font-weight:800;letter-spacing:1.1px;color:#a4ded7}
+    .hero-metric{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.15);display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+    .hero-metric:last-child{border-bottom:0;padding-bottom:0}
+    .hero-metric strong{font-size:29px;line-height:1.1;letter-spacing:-1px;font-weight:900}.hero-metric span{font-size:12px;color:#c9e2e0;text-align:right}
+    .section{padding-block:88px}.section-tinted{background:#ecf5f3}.section-title{font-size:clamp(26px,3.3vw,36px);letter-spacing:-1.2px;line-height:1.35;margin:8px 0 12px;font-weight:900}
+    .section-kicker{color:var(--teal);font-size:12px;font-weight:900;letter-spacing:1.6px}
+    .section-description{color:var(--muted);font-size:14px;margin:0;max-width:820px}
+    .section-header{margin-bottom:30px}
+    .case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .case-card{background:white;border:1px solid #d5e5e3;border-radius:14px;padding:24px;box-shadow:0 5px 24px #153f4710;display:flex;flex-direction:column;scroll-margin-top:100px}
+    .case-card:last-child{grid-column:1/-1}
+    .case-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .case-number{font-size:11px;font-weight:900;letter-spacing:1.2px;color:var(--teal)}
+    .case-project{font-size:11px;color:#768b94}
+    .case-card h3{font-size:19px;letter-spacing:-.6px;line-height:1.5;margin:14px 0 15px}
+    .case-body{display:grid;gap:11px}.case-body p{font-size:13px;line-height:1.8;color:#526773;margin:0;display:grid;grid-template-columns:43px 1fr;gap:9px}
+    .case-body strong{color:#0c6c65;font-size:12px}
+    .case-body .case-result{background:#eff8f5;border-radius:8px;padding:11px 12px;color:#325950}
+    .deep-link{margin-top:auto;padding-top:18px;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--teal-dark);font-weight:800}
+    .projects-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .project-controls{display:flex;gap:8px}
+    .subtle-button{background:white;color:var(--teal-dark);border:1px solid #bfd8d5;border-radius:7px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer}
+    .subtle-button:hover{background:var(--mint)}
+    .company-group{margin-top:44px}
+    .company-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:17px;border-bottom:2px solid var(--deep);padding-bottom:14px}
+    .company-heading h3{font-size:22px;letter-spacing:-.7px;line-height:1.4;margin:4px 0 0}
+    .company-caption{font-size:10px;font-weight:850;letter-spacing:1px;color:var(--teal)}
+    .company-heading p{font-size:12px;color:var(--muted);margin:0;text-align:right}
+    .company-role{display:block;font-weight:700}
+    .project-list{display:grid;gap:10px}
+    .project-accordion{background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden;scroll-margin-top:103px;box-shadow:0 3px 17px #20454908}
+    .project-accordion[open]{border-color:#9bcac4;box-shadow:0 9px 28px #125b5510}
+    .project-accordion summary{display:flex;align-items:center;gap:17px;padding:21px 22px;list-style:none;cursor:pointer;min-height:94px}
+    .project-accordion summary::-webkit-details-marker{display:none}
+    .project-accordion summary:hover{background:#f8fcfb}
+    .project-accordion[open] summary{background:#f2faf7;border-bottom:1px solid #d7e9e6}
+    .project-number{font-size:17px;color:#0e8a80;font-weight:900;flex:0 0 30px}
+    .project-name-group{display:flex;flex-direction:column;flex:1;min-width:0}
+    .project-title{font-size:16px;font-weight:850;letter-spacing:-.5px;line-height:1.55}
+    .project-subtitle{font-size:12px;color:#72848b;line-height:1.6;margin-top:3px}
+    .project-date{font-size:12px;font-weight:700;color:#70838a;text-align:right;max-width:195px;flex-shrink:0}
+    .project-chevron{font-size:22px;color:var(--teal);font-weight:900;transition:transform .2s}
+    .project-accordion[open] .project-chevron{transform:rotate(180deg)}
+    .project-detail{padding:23px 25px 25px 69px}
+    .project-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:11px}
+    .project-type{border-radius:5px;background:#ecf7f4;color:#08756a;font-weight:800;padding:4px 9px}.project-note{color:#6d818a}
+    .project-overview{font-size:14px;color:#3d5864;margin:14px 0 21px;line-height:1.85}
+    .project-columns{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:30px}
+    .project-columns h4{font-size:12px;font-weight:900;color:#0d716a;letter-spacing:.1px;margin:0 0 10px}
+    .project-columns ul{margin:0;padding-left:20px;font-size:13px;color:#4d6370;line-height:1.9}
+    .project-columns li{margin:4px 0}.project-columns li::marker{color:var(--teal)}
+    .project-aside{background:#f6f9f8;border:1px solid #e5efed;border-radius:9px;padding:17px}
+    .project-aside p{font-size:12px;margin:0 0 19px;color:#546b75;line-height:1.8}
+    .tag-list{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:10px;background:white;border:1px solid #d9e7e5;border-radius:5px;color:#49626a;padding:4px 7px;font-weight:700}
+    .case-context{border-top:1px solid #e0ebeb;margin-top:16px;padding-top:12px;display:grid;gap:4px;font-size:11px;color:#5d7577}
+    .case-context a{display:block;color:var(--teal-dark);font-weight:800}
+    .project-caveat{border-left:3px solid #c4a56f;margin:19px 0 0;padding:8px 12px;background:#fff9f0;font-size:12px;color:#775b38}
+    .tech-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .tech-card{background:white;border:1px solid var(--line);border-radius:12px;padding:25px;min-height:140px}
+    .tech-card h3{color:var(--teal-dark);margin:0 0 9px;font-size:14px}
+    .tech-card p{color:#556b76;font-size:13px;margin:0;line-height:1.85}
+    .tech-hint{font-size:12px;color:#6f858b;margin-top:17px}
+    .contact{background:var(--deep);color:#fff;padding:64px 0}
+    .contact-layout{display:flex;justify-content:space-between;align-items:center;gap:24px}
+    .contact h2{margin:8px 0 12px;font-size:29px;letter-spacing:-.8px}.contact p{margin:0;color:#c7dedb;font-size:13px}
+    .contact-actions{display:flex;gap:9px;flex-wrap:wrap}
+    .site-footer{background:#0c3036;color:#a7c4c3;padding:17px 0;font-size:11px}
+    .footer-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.site-footer a:hover{color:white}
+    @media(max-width:850px){.hero-inner{grid-template-columns:1fr;gap:30px;padding-block:65px}.hero-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:18px}.panel-caption{grid-column:1/-1}.hero-metric{display:block;padding:9px 12px;border-bottom:0;border-right:1px solid rgba(255,255,255,.15)}.hero-metric:last-child{border:0;padding:9px 12px}.hero-metric strong{display:block;font-size:23px}.hero-metric span{display:block;text-align:left;margin-top:6px}.project-columns{grid-template-columns:1fr}.project-aside{display:grid;grid-template-columns:1fr 1.2fr;gap:5px 18px}.project-aside .case-context{grid-column:1/-1}}
+    @media(max-width:650px){html{scroll-padding-top:82px}.container{padding-inline:18px}.site-header{height:auto;min-height:65px}.nav-inner{align-items:flex-start;flex-direction:column;padding-block:12px;gap:8px}.nav-links{width:100%;overflow-x:auto;gap:17px;padding-bottom:3px;font-size:12px}.hero-inner{padding-block:49px 47px}.hero h1{font-size:32px;letter-spacing:-1.1px}.hero-lead{font-size:14px}.hero-panel{padding:10px}.hero-metric{padding:10px 6px}.hero-metric strong{font-size:19px}.hero-metric span{font-size:10px}.section{padding-block:58px}.case-grid,.tech-grid{grid-template-columns:1fr}.case-card:last-child{grid-column:auto}.case-card{padding:19px}.projects-intro{align-items:flex-start}.company-heading{align-items:flex-start}.company-heading p{font-size:10px}.project-accordion summary{padding:16px 14px;gap:10px;min-height:90px;flex-wrap:wrap}.project-number{flex-basis:24px}.project-title{font-size:14px}.project-name-group{flex:1 1 calc(100% - 68px)}.project-date{margin-left:34px;text-align:left;max-width:none}.project-chevron{margin-left:auto}.project-detail{padding:19px 16px}.project-overview{font-size:13px}.project-aside{display:block}.contact-layout{align-items:flex-start;flex-direction:column}.footer-row{flex-direction:column;align-items:flex-start}.contact h2{font-size:23px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project-chevron{transition:none}}
+  </style>
 </head>
-<body class="antialiased selection:bg-orange-200 selection:text-orange-900">
-
-<nav class="sticky top-0 z-50 bg-[#fcfaf8]/90 backdrop-blur-md border-b border-stone-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
-            <div class="flex-shrink-0 font-bold text-xl tracking-tight text-orange-900">
-                💻 최상님_포트폴리오
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <button onclick="scrollToSection('summary')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">요약</button>
-                <button onclick="scrollToSection('skills')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">기술 스택</button>
-                <button onclick="scrollToSection('experience')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">프로젝트</button>
-                <button onclick="scrollToSection('achievements')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">문제 해결</button>
-                <button onclick="scrollToSection('resume')" class="text-stone-600 hover:text-orange-800 transition-colors font-medium">이력서</button>
-            </div>
-        </div>
+<body>
+  <a class="skip-link" href="#main" style="position:absolute;top:-80px;left:12px;background:white;color:#123e43;padding:7px;z-index:50" onfocus="this.style.top='10px'" onblur="this.style.top='-80px'">본문으로 바로가기</a>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="포트폴리오 맨 위로">SANGNIM<span>.DEV</span></a>
+      <nav class="nav-links" aria-label="주 메뉴">
+        <a href="#highlights">핵심 기술 사례</a><a href="#projects">실무 프로젝트</a><a href="#tech">기술 스택</a><a class="nav-resume" href="./resume/">웹이력서 ↗</a>
+      </nav>
     </div>
-</nav>
-
-<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
-
-<section id="summary" class="scroll-mt-24 space-y-8">
-
-    <!-- 간략 소개 -->
-    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100">
-        <div class="max-w-5xl">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-800 text-sm font-bold tracking-wide">
-                5년 차 백엔드 개발자
-            </div>
-
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight text-stone-800 mt-6">
-                최상님
-                <span class="text-2xl text-stone-500 font-normal">
-                    Sangnim Choi
-                </span>
-            </h1>
-
-            <p class="text-lg text-stone-600 leading-relaxed mt-6 max-w-5xl">
-                4년 8개월 동안 Java/Spring/eGovFramework 환경에서 ERP 운영, 
-                결제 시스템 전환, 신규 서비스 백엔드 설계·개발을 경험한 백엔드 개발자입니다.
-                요구사항 분석부터 DB 설계, API 개발, 배포까지 경험했으며, 
-                요구사항을 정확히 이해하고 안정적으로 동작하는 기능을 구현하는 것을 중요하게 생각합니다.
-                빠르게 업무를 파악하고 동료와 함께 문제를 해결할 수 있는 개발자로 성장하고 싶습니다.
-            </p>
-
-<!-- 연락처 -->
-            <div class="flex flex-col lg:flex-row lg:flex-wrap gap-4 lg:gap-8 mt-8 pt-6 border-t border-stone-100">
-                <a href="tel:01032865435" class="flex items-center gap-3 text-stone-700 hover:text-orange-900 transition-colors group" aria-label="전화 걸기: 010-3286-5435">
-                    <span class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-sm group-hover:bg-orange-50 transition-colors">📞</span>
-                    <span class="font-medium tracking-wide">010-3286-5435</span>
-                </a>
-                <a href="mailto:lizzychoi1119@gmail.com" class="flex items-center gap-3 text-stone-700 hover:text-orange-900 transition-colors group" aria-label="이메일 작성: lizzychoi1119@gmail.com">
-                    <span class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-sm group-hover:bg-orange-50 transition-colors">📧</span>
-                    <span class="font-medium tracking-wide">lizzychoi1119@gmail.com</span>
-                </a>
-                <a href="https://github.com/lizziechoi-dev" target="_blank" rel="noopener noreferrer"
-                   class="flex items-center gap-3 text-stone-700 hover:text-orange-900 transition-colors group" aria-label="GitHub 프로필 보기">
-                    <span class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-sm group-hover:bg-orange-50 transition-colors">
-                        <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.06c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.7.08-.69.08-.69 1.11.08 1.69 1.14 1.69 1.14.99 1.69 2.6 1.2 3.24.92.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.49 0-1.22.44-2.22 1.14-3-.12-.28-.49-1.42.1-2.96 0 0 .93-.3 3.05 1.14A10.64 10.64 0 0 1 12 6.58c.94 0 1.88.13 2.76.37 2.12-1.44 3.05-1.14 3.05-1.14.59 1.54.22 2.68.1 2.96.71.78 1.14 1.78 1.14 3.0 0 4.26-2.61 5.21-5.1 5.48.4.34.76 1.01.76 2.04v3.02c0 .29.2.64.77.53A11.1 11.1 0 0 0 12 .9Z"/>
-                        </svg>
-                    </span>
-                    <span class="font-medium tracking-wide">github.com/lizziechoi-dev</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- 핵심 역량 -->
-    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-stone-100">
-
-        <div class="mb-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-stone-800">
-                핵심 역량
-            </h2>
-            <p class="text-stone-500 mt-2">
-                실무에서 경험한 주요 백엔드 개발 업무를 정리했습니다.
-            </p>
-        </div>
-
-        <!-- 모바일 1열 / PC 2열 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-8">
-
-            <!-- 1 -->
-            <div class="flex items-start gap-4">
-                <div class="mt-0.5 bg-orange-100 text-orange-800 rounded-full
-                            w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">
-                    1
-                </div>
-
-                <div>
-                    <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        신규 관리자 플랫폼에서 Controller-Service-Mapper 구조로 역할을 분리
-                    </strong>
-
-                    <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                기존에는 비즈니스 로직과 DB 접근 로직이 한 곳에 섞여 있던 구조를
-                                Controller-Service-Mapper로 분리해 역할을 나눴습니다.
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <!-- 2 -->
-            <div class="flex items-start gap-4">
-                <div class="mt-0.5 bg-orange-100 text-orange-800 rounded-full
-                            w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">
-                    2
-                </div>
-
-                <div>
-                    <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        조건부 UPDATE와 처리 건수 확인으로 동시 요청 시 데이터 정합성 확보
-                    </strong>
-
-                    <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                대여 가능한 상태일 때만 UPDATE되도록 조건을 두고,
-                                실제 변경된 행 수를 확인해 동시에 들어온 대여 요청을 처리했습니다.
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <!-- 3 -->
-            <div class="flex items-start gap-4">
-                <div class="mt-0.5 bg-orange-100 text-orange-800 rounded-full
-                            w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">
-                    3
-                </div>
-
-                <div>
-                    <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        미디어 파일 처리 및 영상 변환
-                    </strong>
-
-                    <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                이미지·영상·PDF 다중 첨부 기능을 확장하고 PDF 첫 페이지·영상 첫 프레임을 추출해 썸네일을 생성했습니다.
-                            </span>
-                        </li>
-
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                ffprobe로 HEVC(H.265) 코덱을 확인하고 FFmpeg로 H.264 MP4로 변환했으며, 처리 후 원본과 3시간 이상 지난 임시파일을 정리했습니다.
-                            </span>
-                        </li>                  
-                    </ul>
-                </div>
-            </div>
-
-
-            <!-- 4 -->
-            <div class="flex items-start gap-4">
-                <div class="mt-0.5 bg-orange-100 text-orange-800 rounded-full
-                            w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">
-                    4
-                </div>
-
-                <div>
-                    <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        JENNIFER APM으로 에러·지연 트랜잭션 추적
-                    </strong>
-
-                    <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                JENNIFER APM의 X-View를 활용하여 CS 발생 시 원인을 확인하고
-                                에러와 지연 트랜잭션을 추적했습니다.
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <!-- 5 : 내용이 많아서 PC에서도 전체 폭 사용 -->
-            <div class="flex items-start gap-4 lg:col-span-2">
-                <div class="mt-0.5 bg-orange-100 text-orange-800 rounded-full
-                            w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">
-                    5
-                </div>
-
-                <div>
-                    <strong class="text-stone-800 block mb-2 text-base md:text-lg">
-                        PG 전환 과정에서 결제 API 연동·데이터 매핑·QA 및 시나리오 테스트 수행
-                    </strong>
-                
-                    <ul class="space-y-1 text-sm leading-relaxed text-stone-500">
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                외부 PG사의 API 규격에 맞춰 기존 시스템의 결제 데이터를 매핑하고,
-                                빌링키 관련 API와 가상계좌 발급·입금 통보, 승인·취소 API를 연동했습니다.
-                            </span>
-                        </li>
-                
-                        <li class="flex items-start gap-2">
-                            <span class="text-stone-300 shrink-0">•</span>
-                            <span>
-                                승인·취소·가상계좌 입금 시나리오 QA와 초과·부족 입금 등 예외 케이스를 검증하고 계획된 점검 시간 내 신규 PG 시스템으로 전환했습니다.
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</section>
-
-    <!-- Tech Stack Section -->
-    <section id="skills" class="scroll-mt-24 space-y-10">
-        <div class="text-center space-y-4">
-            <h2 class="text-4xl font-black text-stone-900 tracking-tight">기술 스택</h2>
-            <p class="text-stone-500 text-lg max-w-3xl mx-auto">
-                실무에서 사용한 기술을 역할과 활용 경험 중심으로 정리했습니다.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
-                <div class="flex items-center justify-between gap-4 mb-4">
-                    <h3 class="text-xl font-black text-stone-800">Backend</h3>
-                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">Core</span>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">Java</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">Spring Framework</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">eGovFramework</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium">REST API</span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-stone-500">
-                    신규 관리자 플랫폼과 출입·장비 관리 서비스의 백엔드 구조, API, 비즈니스 로직을 설계·개발했습니다.
-                </p>
-            </div>
-
-            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
-                <div class="flex items-center justify-between gap-4 mb-4">
-                    <h3 class="text-xl font-black text-stone-800">Database</h3>
-                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">Data</span>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Oracle</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">MSSQL</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">MyBatis</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">iBatis</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">SQL</span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-stone-500">
-                    동적 조회, 현업 요청 데이터 추출, 계층형 데이터 처리와 운영성 조회 쿼리 작성에 활용했습니다.
-                </p>
-            </div>
-
-            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
-                <div class="flex items-center justify-between gap-4 mb-4">
-                    <h3 class="text-xl font-black text-stone-800">Frontend / View</h3>
-                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">View</span>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JSP</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JavaScript</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">jQuery</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">HTML/CSS</span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-stone-500">
-                    ERP·백오피스 실무 화면과 쇼핑몰 회원 영역의 화면 수정·개발 및 유지보수에 사용했습니다.
-                </p>
-            </div>
-
-            <div class="bg-white p-7 rounded-3xl shadow-sm border border-stone-100">
-                <div class="flex items-center justify-between gap-4 mb-4">
-                    <h3 class="text-xl font-black text-stone-800">DevOps & Tools</h3>
-                    <span class="text-[10px] font-black tracking-[0.18em] uppercase text-orange-700">Operations</span>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">GitLab</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">SVN</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Jenkins</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">JENNIFER APM</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">Postman</span>
-                    <span class="px-3.5 py-1.5 bg-stone-100 rounded-full text-stone-700 text-sm font-medium">eXERD</span>
-                </div>
-                <p class="mt-4 text-sm leading-relaxed text-stone-500">
-                    형상관리·배포, API 테스트, 운영 중 오류와 지연 트랜잭션 추적에 활용했습니다.
-                </p>
-            </div>
-        </div>
-    </section>
-
-<!-- Projects Section -->
-    <section id="experience" class="scroll-mt-24 space-y-12">
-        <div class="text-center space-y-4">
-            <h2 class="text-4xl font-black text-stone-900 tracking-tight">프로젝트 경험</h2>
-            <p class="text-stone-500 text-lg max-w-3xl mx-auto">
-                실무와 개인 프로젝트에서 수행한 개발 경험을 정리했습니다.
-                각 프로젝트의 문제와 목표, 구현 과정과 결과를 중심으로 작성했습니다.
-            </p>
-        </div>
-
-        <div class="flex flex-wrap justify-center gap-5 sm:gap-12 border-b border-stone-200">
-            <button onclick="switchCompany('personal')" id="btn-personal" class="tab-btn pb-6 relative transition-all group">
-                <div class="text-2xl font-black text-orange-900 transition-colors title-text">개인 프로젝트</div>
-                <div class="text-xs font-bold text-stone-500 mt-2 tracking-widest date-text">2026.10 - 진행 중</div>
-                <div class="tab-indicator absolute -bottom-[1px] left-0 w-full h-[3px] bg-orange-900 transition-all opacity-100"></div>
-            </button>
-            <button onclick="switchCompany('watt')" id="btn-watt" class="tab-btn pb-6 relative transition-all group">
-                <div class="text-2xl font-black text-stone-300 group-hover:text-stone-500 transition-colors title-text">㈜와트 (WATT)</div>
-                <div class="text-xs font-bold text-stone-300 mt-2 tracking-widest date-text uppercase">2022.10 - 2024.10</div>
-                <div class="tab-indicator absolute -bottom-[1px] left-0 w-full h-[3px] bg-orange-900 transition-all opacity-0"></div>
-            </button>
-            <button onclick="switchCompany('hansalim')" id="btn-hansalim" class="tab-btn pb-6 relative transition-all group">
-                <div class="text-2xl font-black text-stone-300 group-hover:text-stone-500 transition-colors title-text">한살림사업연합</div>
-                <div class="text-xs font-bold text-stone-300 mt-2 tracking-widest date-text uppercase">2019.10 - 2022.04</div>
-                <div class="tab-indicator absolute -bottom-[1px] left-0 w-full h-[3px] bg-orange-900 transition-all opacity-0"></div>
-            </button>
-        </div>
-
-        <!-- 개인 프로젝트: 새 프로젝트를 추가할 때 personal-project-list 안에 카드를 추가 -->
-        <div id="content-personal" class="company-content space-y-10">
-            <div class="flex items-center justify-between border-l-4 border-orange-900 pl-6 py-2">
-                <div class="space-y-1">
-                    <h3 class="text-2xl font-black text-stone-800 tracking-tight">개인 프로젝트</h3>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2.5 py-0.5 bg-stone-100 text-stone-600 text-[11px] font-bold rounded uppercase">개인 개발 및 실험</span>
-                        <span class="text-stone-400 text-xs font-medium tracking-wide">2026.10 - 진행 중</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid gap-8" id="personal-project-list">
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-stone-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 px-6 py-2 bg-stone-100 text-stone-700 font-black text-[10px] tracking-widest uppercase rounded-bl-2xl">프롬프트 비교 실험</div>
-                    <div class="mb-10">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5 mb-3">
-                            <h3 class="text-2xl md:text-3xl font-black text-stone-900">LLM Prompt Benchmark</h3>
-                        </div>
-                        <p class="text-stone-400 font-bold font-mono text-xs tracking-wider uppercase">Python · Gemini REST API · Git/GitHub</p>
-                        <p class="text-stone-600 text-sm leading-relaxed mt-5">Gemini API로 동일한 고객 문의에 프롬프트 v1/v2를 적용하고 응답 내용·응답시간·토큰 사용량을 비교하는 미니 프로젝트입니다.</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-10 md:gap-16">
-                        <div class="space-y-6">
-                            <h4 class="text-orange-800 font-black text-sm uppercase tracking-widest">Problem &amp; Goal</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 동일 질문에 서로 다른 프롬프트를 적용해 응답 형식과 내용의 차이 확인</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 응답시간·토큰 사용량을 기록하고 API 실패 결과도 함께 관리</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-emerald-700 font-black text-sm uppercase tracking-widest">Action &amp; Result</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 질문 5개 × 프롬프트 2종, 총 10개 조합의 응답시간·토큰·오류를 CSV로 기록</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> HTTP 429/503 및 timeout 처리, 실제 실행 결과 성공 7개·timeout 3개 기록</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> v2에서 답변 형식이 더 일정해진 점과 미확인 정보가 일부 남는 한계를 README에 정리</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="mt-8 pt-6 border-t border-stone-100">
-                        <a href="https://github.com/lizziechoi-dev/llm-prompt-benchmark" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-bold text-orange-800 hover:text-orange-950 text-sm underline underline-offset-4">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End personal projects -->
-
-        <!-- Watt Content -->
-        <div id="content-watt" class="company-content space-y-10" style="display: none;">
-            <div class="flex items-center justify-between border-l-4 border-orange-900 pl-6 py-2">
-                <div class="space-y-1">
-                    <h3 class="text-2xl font-black text-stone-800 tracking-tight">㈜와트 (WATT)</h3>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2.5 py-0.5 bg-stone-100 text-stone-600 text-[11px] font-bold rounded uppercase">백엔드 개발자</span>
-                        <span class="text-stone-400 text-xs font-medium tracking-wide">2022.10 ~ 2024.10</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid gap-8">
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-stone-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 px-6 py-2 bg-stone-100 text-stone-700 font-black text-[10px] tracking-widest uppercase rounded-bl-2xl">백엔드 설계 및 개발 담당</div>
-                    <div class="mb-10">
-                        <h3 class="text-3xl font-black text-stone-900 mb-3">와트매니저2 신규 백엔드 전체 개발</h3>
-                        <p class="text-stone-400 font-bold font-mono text-xs tracking-wider uppercase">Java · eGovFramework/Spring · MyBatis · MSSQL · REST API</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-16">
-                        <div class="space-y-6">
-                            <h4 class="text-orange-800 font-black flex items-center gap-2 text-sm uppercase tracking-widest">Problem & Goal</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 기존 시스템에서 비즈니스 로직과 DB 접근 로직이 섞여 있어 역할 분리가 필요</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 신규 관리자 플랫폼의 DB 및 API 구조 설계</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 반복되는 API 응답과 목록 조회 기능의 공통화</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-emerald-700 font-black flex items-center gap-2 text-sm uppercase tracking-widest">Action & Result</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> Controller-Service-Mapper로 역할을 분리하여 백엔드 구조 구성</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 공통 Response 객체와 ResultEnums를 적용하여 성공·오류 응답 형식 통일</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 공통 페이지네이션 기능 구현 및 동적 정렬 시 허용된 항목만 사용하도록 제한</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 계층형 데이터 복사 시 기존 ID와 신규 ID를 매핑하여 부모·자식 관계가 유지되도록 구현</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-stone-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 px-6 py-2 bg-stone-100 text-stone-700 font-black text-[10px] tracking-widest uppercase rounded-bl-2xl">단독 설계/구현</div>
-                    <div class="mb-10">
-                        <h3 class="text-3xl font-black text-stone-900 mb-3">출입 신청 시스템 신규 백엔드 개발</h3>
-                        <p class="text-stone-400 font-bold font-mono text-xs tracking-wider uppercase">Java · eGovFramework/Spring · MyBatis · MSSQL</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-16">
-                        <div class="space-y-6">
-                            <h4 class="text-orange-800 font-black flex items-center gap-2 text-sm uppercase tracking-widest">Problem & Goal</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 출입 신청, 협력업체 승인, 안전교육 이수 과정을 하나의 시스템에서 처리</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 사용자와 관리자에 따라 필요한 기능을 구분</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 출입 상태 변경 요청 시 서버의 현재 상태 확인 및 안전교육 이수 상태 처리</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-emerald-700 font-black flex items-center gap-2 text-sm uppercase tracking-widest">Action & Result</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> JWT에 사용자/관리자 구분 정보를 포함하여 화면 구성에 활용할 수 있도록 처리</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 서버 시간 기준으로 안전교육 이수 가능 시각을 계산하고 이수 여부 처리</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-stone-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 px-6 py-2 bg-stone-100 text-stone-700 font-black text-[10px] tracking-widest uppercase rounded-bl-2xl">단독 설계/구현</div>
-                    <div class="mb-10">
-                        <h3 class="text-3xl font-black text-stone-900 mb-3">직캠 관리 앱 신규 백엔드 개발</h3>
-                        <p class="text-stone-400 font-bold font-mono text-xs tracking-wider uppercase">Java · MyBatis · MSSQL · Concurrency Control</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-16">
-                        <div class="space-y-6">
-                            <h4 class="text-orange-800 font-black text-sm uppercase tracking-widest">Problem & Goal</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 직캠 장비의 대여·반납 및 현장 작업허가서 관리 기능 개발</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 여러 사용자가 동일 장비에 대여 요청을 보낼 경우 중복 대여 방지 필요</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-emerald-700 font-black text-sm uppercase tracking-widest">Action & Result</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 직캠 장비 대여·반납 기능 및 일자별 작업허가서 데이터를 여러 데이터로 조합해 복합 JSON으로 반환하는 API 개발</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 대여 가능 상태일 때만 변경되도록 조건부 UPDATE 적용</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> UPDATE 영향 행 수를 확인하여 먼저 처리된 요청이 있는 경우 이후 요청은 실패하도록 처리</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hansalim Content -->
-        <div id="content-hansalim" class="company-content space-y-10" style="display: none;">
-            <div class="flex items-center justify-between border-l-4 border-orange-900 pl-6 py-2">
-                <div class="space-y-1">
-                    <h3 class="text-2xl font-black text-stone-800 tracking-tight">한살림사업연합</h3>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2.5 py-0.5 bg-stone-100 text-stone-600 text-[11px] font-bold rounded uppercase">풀스택 개발자</span>
-                        <span class="text-stone-400 text-xs font-medium tracking-wide">2019.10 ~ 2022.04</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid gap-8">
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-stone-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 px-6 py-2 bg-stone-100 text-stone-700 font-black text-[10px] tracking-widest uppercase rounded-bl-2xl">PG 전환 개발 담당</div>
-                    <div class="mb-10">
-                        <h3 class="text-3xl font-black text-stone-900 mb-3">차세대 결제(PG) 전면 개편</h3>
-                        <p class="text-stone-400 font-bold font-mono text-xs tracking-wider uppercase">Java · Spring · Oracle · iBatis · JSP/JS · REST API</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-16">
-                        <div class="space-y-6">
-                            <h4 class="text-orange-800 font-black text-sm uppercase tracking-widest">Problem & Goal</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 기존 결제 시스템을 신규 PG사의 API 규격에 맞게 전환</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 기존 결제 데이터와 신규 PG 데이터 간 매핑 필요</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 승인·취소·가상계좌 입금 등 결제 유형별 정상·예외 시나리오 검증 필요</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-emerald-700 font-black text-sm uppercase tracking-widest">Action & Result</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 외부 PG사 API 규격에 맞춰 기존 결제 데이터 매핑</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 빌링키 관련 API와 가상계좌 발급·입금 통보, 결제 승인·취소 API 연동</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> ERP 내 실무자용 결제 확인 화면 일부 수정·개발</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 승인·취소·가상계좌 입금 등 시나리오별 QA를 수행하고 결제 결과·상태의 정상 반영 및 초과·부족 입금 등 예외 케이스 검증</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 계획된 점검 시간 내 신규 PG 시스템 전환</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-stone-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 px-6 py-2 bg-stone-100 text-stone-700 font-black text-[10px] tracking-widest uppercase rounded-bl-2xl">백오피스 고도화</div>
-                    <div class="mb-10">
-                        <h3 class="text-3xl font-black text-stone-900 mb-3">조합원 ERP 시스템 개발 및 운영</h3>
-                        <p class="text-stone-400 font-bold font-mono text-xs tracking-wider uppercase">Java · Spring · Oracle · iBatis · JENNIFER APM</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-16">
-                        <div class="space-y-6">
-                            <h4 class="text-orange-800 font-black text-sm uppercase tracking-widest">Problem & Goal</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 조합원 가입·탈퇴, 결제, 정기 CMS, 자금관리 등 다양한 업무 기능 개발 및 운영</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 현업의 다양한 검색조건에 맞는 데이터 조회 및 추출 기능 필요</li>
-                                <li class="flex gap-3"><span class="text-orange-300 mt-1">•</span> 운영 중 발생하는 오류와 지연 요청의 원인 확인 필요</li>
-                            </ul>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-emerald-700 font-black text-sm uppercase tracking-widest">Action & Result</h4>
-                            <ul class="space-y-4 text-stone-600 text-sm leading-relaxed font-medium">
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 조합원, 결제, 정기 CMS, 자금관리 관련 API 및 실무자 화면 개발</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 실무자 화면의 다양한 검색 조건을 처리하기 위한 동적 조회 쿼리 작성</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 현업 요청에 따라 Oracle SQL Developer에서 복합 조회 쿼리를 작성해 데이터 추출 및 제공</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> 사내 ERP 솔루션을 활용해 실무 업무에 필요한 조회·관리 기능 개발</li>
-                                <li class="flex gap-3"><span class="text-emerald-300 mt-1">✔</span> JENNIFER APM의 X-View와 로그를 활용하여 에러 및 지연 트랜잭션 원인 추적</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Troubleshooting Section (Accordion) -->
-    <!-- <section id="achievements" class="scroll-mt-24 space-y-12 pb-32"> -->
-    <section id="achievements" class="scroll-mt-24 space-y-12">    
-        <div class="text-center space-y-4">
-            <h2 class="text-4xl font-black text-stone-900 tracking-tight">핵심 문제 해결 스토리</h2>
-            <p class="text-stone-500 text-lg max-w-3xl mx-auto">
-                현업에서 직면했던 도전적인 기술적 과제들과 이를 해결하기 위한 사고 과정, <br>그리고 백엔드 개발자로서 치열하게 고민한 실질적인 대응 전략을 정리했습니다.
-            </p>
-        </div>
-
-        <div class="space-y-6 mx-auto">
-            <!-- Story 1 -->
-            <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
-                <button onclick="toggleAccordion('acc-1')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
-                    <div class="flex flex-col gap-2">
-                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">DATA RELATIONSHIP</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">계층형 데이터를 복사할 때 새로 발급되는 PK로 인해 부모·자식 관계가 깨지는 문제를 어떻게 해결했나요?</span>
-                    </div>
-                    <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
-                </button>
-                <div id="acc-1" class="acc-content border-t border-stone-100 bg-stone-50/30">
-                    <div class="px-12 py-12 space-y-10">
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">템플릿의 부모·자식 데이터를 함께 복사하면 Auto Increment로 새로운 PK가 발급됩니다. 이 때문에 자식 데이터가 기존 부모 PK를 그대로 참조하면 복사된 데이터의 계층 관계가 깨지는 문제가 있었습니다.</p>
-                        </div>
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">복사 전의 ID를 별도로 보관하고, 데이터 복사 후 기존 ID와 새로 발급된 ID를 매핑했습니다. 이후 자식 데이터가 참조하는 부모 ID를 매핑된 신규 부모 PK로 변경하여 복사본끼리 연결되도록 처리했습니다.</p>
-                        </div>
-                        <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
-                            <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"복사된 데이터에서도 기존 템플릿의 부모·자식 관계가 유지되도록 구현했습니다."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Story 2 -->
-            <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
-                <button onclick="toggleAccordion('acc-2')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
-                    <div class="flex flex-col gap-2">
-                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">CONCURRENCY & INTEGRITY</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">여러 사용자가 같은 장비를 동시에 대여하려는 요청을 어떻게 처리했나요?</span>
-                    </div>
-                    <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
-                </button>
-                <div id="acc-2" class="acc-content border-t border-stone-100 bg-stone-50/30">
-                    <div class="px-12 py-12 space-y-10">
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">여러 사용자가 동일한 장비를 거의 동시에 대여할 경우, 상태를 먼저 조회한 뒤 변경하는 방식에서는 두 요청 모두 대여 가능하다고 판단할 수 있었습니다.</p>
-                        </div>
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">대여 가능한 상태일 때만 상태가 변경되도록 UPDATE문의 조건에 현재 상태를 포함했습니다. 이후 실제 변경된 행 수를 확인하여 1건이면 대여 성공, 0건이면 다른 요청이 먼저 처리된 것으로 판단했습니다.</p>
-                        </div>
-                        <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
-                            <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"별도의 애플리케이션 락을 구현하지 않고 조건부 UPDATE와 영향 행 수 확인을 통해 동일 장비에 대한 동시 대여 요청을 처리했습니다."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Story 3 -->
-            <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
-                <button onclick="toggleAccordion('acc-3')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
-                    <div class="flex flex-col gap-2">
-                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">MEDIA PROCESSING</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">이미지·영상·PDF 첨부 기능에서 썸네일 처리와 HEVC 영상 호환성 문제를 어떻게 해결했나요?</span>
-                    </div>
-                    <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
-                </button>
-                <div id="acc-3" class="acc-content border-t border-stone-100 bg-stone-50/30">
-                    <div class="px-12 py-12 space-y-10">
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">기존 메모 기능을 이미지·영상·PDF 다중 첨부가 가능하도록 확장하면서 파일 형식별 썸네일 처리가 필요했습니다. 또한 아이폰 HEVC(H.265) 영상은 서비스 환경에서 웹 재생 호환성 문제가 있었고, 영상 변환 과정에서 원본과 임시파일이 서버에 계속 쌓이지 않도록 관리할 필요도 있었습니다.</p>
-                        </div>
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">파일 형식에 따라 처리 방식을 나눴습니다. PDF는 PDFBox로 첫 페이지를 이미지로 변환하고, 영상은 JCodec으로 첫 프레임을 추출해 공통 크기의 썸네일을 생성했습니다. 영상은 ffprobe로 코덱을 확인하고 HEVC(H.265)인 경우 FFmpeg를 이용해 H.264 코덱의 MP4로 변환했습니다. 영상 처리에 사용한 원본 파일은 작업 후 삭제하고, 임시 파일은 마지막 수정시간을 기준으로 3시간 이상 지난 파일을 정리하도록 구현했습니다.</p>
-                        </div>
-                        <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
-                            <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"이미지·영상·PDF를 다중 첨부할 수 있도록 기능을 확장하고, 파일 형식에 맞는 썸네일을 제공했습니다. HEVC 영상은 H.264 MP4로 변환해 재생 호환성을 확보했으며, 원본과 오래된 임시파일을 정리해 파일이 불필요하게 쌓이지 않도록 했습니다."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Story 4 -->
-            <div class="border border-stone-200 rounded-3xl bg-white overflow-hidden shadow-sm">
-                <button onclick="toggleAccordion('acc-4')" class="w-full text-left px-8 py-8 flex justify-between items-center hover:bg-stone-50 transition-colors focus:outline-none group">
-                    <div class="flex flex-col gap-2">
-                        <span class="text-[10px] font-black text-orange-700 tracking-[0.2em] uppercase">EDUCATION PROGRESS</span>
-                        <span class="text-2xl font-black text-stone-800 group-hover:text-orange-800 transition-colors tracking-tight">안전교육 영상의 시청 진행 상태와 이수 정보를 어떻게 관리했나요?</span>
-                    </div>
-                    <span class="acc-arrow text-2xl text-stone-300 transition-transform duration-300">▼</span>
-                </button>
-                <div id="acc-4" class="acc-content border-t border-stone-100 bg-stone-50/30">
-                    <div class="px-12 py-12 space-y-10">
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Problem Situation</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">안전교육 영상을 일정 시간 이상 시청했는지 관리해야 했고, 프론트 화면의 상태만으로 처리하지 않고 사용자별 시청 진행 상태를 서버에 보관할 필요가 있었습니다.</p>
-                        </div>
-                        <div>
-                            <h5 class="text-stone-400 font-black text-[10px] uppercase tracking-widest mb-4">Action Plan</h5>
-                            <p class="text-stone-700 leading-relaxed text-lg font-medium">프론트엔드에서 시청 신호를 전달하면 서버 시간을 기준으로 시청 시점을 저장하고, 교육시간을 반영한 이수 가능 시각을 미리 계산해 저장했습니다. 이후 요청 시 서버 현재 시간과 이수 가능 시각을 비교하여 기준 시간이 지난 경우 이수 완료 상태를 반환했습니다.</p>
-                        </div>
-                        <div class="p-8 bg-orange-50 rounded-2xl border border-orange-100 shadow-inner">
-                            <h5 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-3">Core Result</h5>
-                            <p class="text-orange-900 font-bold text-xl leading-relaxed italic">"프론트엔드의 시간값에 의존하지 않고 서버 시간을 기준으로 이수 가능 시각을 계산후 비교하여 교육 이수 여부를 처리했습니다."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  </header>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title"><div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">BACKEND DEVELOPER · PORTFOLIO</span>
+        <h1 id="hero-title">데이터와 업무 로직을<br>깊이 있게 다루는 <em>백엔드 개발자</em></h1>
+        <p class="hero-lead">Java/Spring 기반 기업 업무 시스템을 설계·개발·운영했습니다. 신규 백엔드 3개를 전담하며 계층형 데이터 처리와 동시 요청 제어를 구현했고, 기존 시스템에서는 미디어 처리 및 기술 환경 개선을 수행했습니다.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#projects">실무 프로젝트 살펴보기 <span aria-hidden="true">↘</span></a><a class="btn btn-ghost" href="#highlights">기술 구현 사례 보기</a></div>
+      </div>
+      <aside class="hero-panel" aria-label="경력 요약"><div class="panel-caption">CAREER AT A GLANCE</div><div class="hero-metric"><strong>4년 8개월</strong><span>실무 경력</span></div><div class="hero-metric"><strong>3개</strong><span>신규 백엔드 전담</span></div><div class="hero-metric"><strong>7개</strong><span>실무 프로젝트</span></div></aside>
+    </div></section>
+    <section class="section section-tinted" id="highlights" aria-labelledby="highlights-title"><div class="container">
+      <div class="section-header"><span class="section-kicker">01 / ENGINEERING HIGHLIGHTS</span><h2 class="section-title" id="highlights-title">핵심 기술 구현 및 문제 해결 사례</h2><p class="section-description">기술 이름만 나열하는 대신, 어떤 상황에서 무엇을 구현하고 개선했는지 정리했습니다. 사례를 선택하면 해당 실무 프로젝트가 펼쳐집니다.</p></div>
+      <div class="case-grid"><article class="case-card" id="highlight-concurrency">
+  <div class="case-top"><span class="case-number">CASE 01</span><span class="case-project">직캠 관리 앱</span></div>
+  <h3>동일 장비의 중복 대여 방지</h3>
+  <div class="case-body"><p><strong>상황</strong>동시에 들어온 요청이 동일 장비를 대여하는 상황을 방지해야 했습니다.</p><p><strong>구현</strong>대여 가능 상태를 WHERE 조건으로 검사하는 UPDATE와 영향 행 수 확인 로직을 구현했습니다.</p><p class="case-result"><strong>결과</strong>동일 장비에 대한 경쟁 요청에서 하나의 대여만 성공하도록 처리했습니다.</p></div>
+  <a class="deep-link" href="#project-camera" data-open-project="project-camera">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
+</article>
+<article class="case-card" id="highlight-hierarchy">
+  <div class="case-top"><span class="case-number">CASE 02</span><span class="case-project">와트매니저2</span></div>
+  <h3>계층형 체크리스트 관계 유지</h3>
+  <div class="case-body"><p><strong>상황</strong>템플릿을 복제할 때 신규 PK 때문에 기존 부모·자식 참조가 그대로 유지되지 않았습니다.</p><p><strong>구현</strong>기존 ID와 새 PK의 매핑 정보를 관리하고 하위 항목의 부모 참조를 새 ID로 연결했습니다.</p><p class="case-result"><strong>결과</strong>복제된 체크리스트의 계층 관계를 유지하도록 구현했습니다.</p></div>
+  <a class="deep-link" href="#project-manager" data-open-project="project-manager">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
+</article>
+<article class="case-card" id="highlight-dependency">
+  <div class="case-top"><span class="case-number">CASE 03</span><span class="case-project">기존 시스템 기술 환경</span></div>
+  <h3>Maven 의존성 충돌 해결</h3>
+  <div class="case-body"><p><strong>상황</strong>eGovFramework 3.x→4.0 마이그레이션 과정에서 의존성 버전 및 설정 호환성 문제가 발생했습니다.</p><p><strong>구현</strong>라이브러리 버전을 조정하고 Maven exclusions로 충돌을 줄이며 설정을 검토했습니다.</p><p class="case-result"><strong>결과</strong>업그레이드 과정의 기술 문제를 해결했습니다. 단, 최종 운영 환경에는 반영되지 않았습니다.</p></div>
+  <a class="deep-link" href="#project-maintenance" data-open-project="project-maintenance">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
+</article>
+<article class="case-card" id="highlight-video">
+  <div class="case-top"><span class="case-number">CASE 04</span><span class="case-project">기존 시스템 미디어 처리</span></div>
+  <h3>영상 재생 호환성 개선</h3>
+  <div class="case-body"><p><strong>상황</strong>일부 HEVC(H.265) 영상은 웹 환경에서 재생 호환성이 제한적이었습니다.</p><p><strong>구현</strong>ffprobe로 코덱을 확인하고 FFmpeg로 H.264 MP4 변환 기능을 구현했습니다.</p><p class="case-result"><strong>결과</strong>웹에서 활용 가능한 영상 형식으로 변환하는 처리 흐름을 마련했습니다.</p></div>
+  <a class="deep-link" href="#project-maintenance" data-open-project="project-maintenance">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
+</article>
+<article class="case-card" id="highlight-education">
+  <div class="case-top"><span class="case-number">CASE 05</span><span class="case-project">출입 신청 시스템</span></div>
+  <h3>서버 기준 안전교육 이수 판정</h3>
+  <div class="case-body"><p><strong>상황</strong>사용자 기기의 시각에 의존하면 교육 이수 가능 시각 판정의 일관성을 확보하기 어렵습니다.</p><p><strong>구현</strong>서버 시간을 기준으로 이수 가능 시각을 계산·검증하는 업무 로직을 구현했습니다.</p><p class="case-result"><strong>결과</strong>클라이언트 시간에 의존하지 않는 이수 판정 흐름을 구성했습니다.</p></div>
+  <a class="deep-link" href="#project-access" data-open-project="project-access">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
+</article></div>
+    </div></section>
+    <section class="section" id="projects" aria-labelledby="projects-title"><div class="container">
+      <div class="section-header projects-intro"><div><span class="section-kicker">02 / PROFESSIONAL PROJECTS</span><h2 class="section-title" id="projects-title">실무 프로젝트 7개</h2><p class="section-description">회사별로 묶고, 프로젝트 시작일 기준 최신순으로 배치했습니다. 제목을 눌러 담당 업무와 구현 내용을 펼쳐보세요.</p></div><div class="project-controls"><button class="subtle-button" id="expand-all" type="button">전체 펼치기</button><button class="subtle-button" id="collapse-all" type="button">전체 접기</button></div></div>
+      <div class="company-group"><div class="company-heading"><div><span class="company-caption">PROFESSIONAL EXPERIENCE</span><h3>㈜와트</h3></div><p>2022.10 – 2024.10<span class="company-role">Backend Developer</span></p></div><div class="project-list"><details class="project-accordion" id="project-camera" open>
+  <summary><span class="project-number">01</span><span class="project-name-group"><span class="project-title">직캠 관리 앱 신규 백엔드 개발</span><span class="project-subtitle">장비 대여·반납과 작업허가서 데이터를 제공하는 신규 앱의 백엔드</span></span><span class="project-date">2023.05 – 2024.10</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">동시 요청 · 장비 관리</span><span class="project-note">고도화 기간 포함</span></div>
+    <p class="project-overview">산업현장의 직캠 장비 대여·반납과 상태 관리, 일자별 작업허가서 데이터 제공을 위한 REST API를 설계·개발했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>직캠 장비의 대여·반납 및 상태 관리 API와 비즈니스 로직 구현</li><li>대여 가능한 상태인 경우에만 UPDATE하도록 조건을 두고 영향 행 수로 성공 여부 확인</li><li>동일 장비에 대한 중복 대여 방지 로직 구현</li><li>여러 조회 결과를 조합해 작업허가서 데이터를 중첩 JSON 형태로 제공</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-concurrency">동일 장비의 중복 대여 방지 ↗</a></div></aside></div>
     
-    <!-- Resume Section -->
-    <section id="resume" class="scroll-mt-24 space-y-12">
+  </div>
+</details>
+<details class="project-accordion" id="project-access" >
+  <summary><span class="project-number">02</span><span class="project-name-group"><span class="project-title">출입 신청 시스템 신규 백엔드 개발</span><span class="project-subtitle">출입 신청·검토·승인·반려와 안전교육 이수 관리</span></span><span class="project-date">2023.03 – 2024.10</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">승인 프로세스 · 서버 시간</span><span class="project-note">고도화 기간 포함</span></div>
+    <p class="project-overview">산업현장 출입 신청부터 검토·승인·반려까지 이어지는 업무 프로세스와 안전교육 이수 관리 기능의 백엔드를 설계·개발했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>출입 신청·검토·승인·반려 단계별 API 및 업무 처리 로직 구현</li><li>JWT에 사용자·관리자 구분 정보를 포함해 프론트엔드의 화면 분기에 활용</li><li>클라이언트 시간이 아닌 서버 시간을 기준으로 안전교육 이수 가능 시각 계산·검증</li><li>업무 단계별 상태 조회 및 처리 기능 구현</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span><span class="tag">JWT</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-education">서버 기준 안전교육 이수 판정 ↗</a></div></aside></div>
     
-        <!-- Section Title -->
-        <div class="text-center space-y-4">
-            <h2 class="text-4xl font-black text-stone-900 tracking-tight">
-                웹 이력서
-            </h2>
+  </div>
+</details>
+<details class="project-accordion" id="project-manager" >
+  <summary><span class="project-number">03</span><span class="project-name-group"><span class="project-title">와트매니저2 신규 백엔드 개발</span><span class="project-subtitle">회원·디바이스·그룹·체크리스트 관리 플랫폼</span></span><span class="project-date">2023.01 – 2024.10</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">백엔드 구조 · 계층형 데이터</span><span class="project-note">고도화 기간 포함</span></div>
+    <p class="project-overview">신규 관리자 통합 플랫폼의 백엔드 구조와 REST API, 공통 기능 및 주요 관리 로직을 1인 전담하여 개발했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>Controller–Service–Mapper 구조와 공통 응답 객체·결과 코드·페이지네이션 구현</li><li>회원·디바이스·그룹·자료 관리 API 및 MyBatis 동적 SQL 기반 검색 기능 개발</li><li>계층형 체크리스트의 생성·이동·정렬·템플릿 복제 기능 구현</li><li>복제 과정의 기존·신규 PK 매핑으로 부모·자식 관계 유지</li><li>정렬 허용 목록 검증 및 MyBatis의 고정 SQL 분기로 정렬 처리의 안전성 확보</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>백엔드 설계·개발 100% (1인 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">eGovFramework</span><span class="tag">MyBatis</span><span class="tag">MSSQL</span><span class="tag">REST API</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-hierarchy">계층형 체크리스트 관계 유지 ↗</a></div></aside></div>
     
-            <p class="text-stone-500 text-lg max-w-3xl mx-auto">
-                경력과 주요 프로젝트를 간결하게 정리했습니다.
-            </p>
-        </div>
+  </div>
+</details>
+<details class="project-accordion" id="project-maintenance" >
+  <summary><span class="project-number">04</span><span class="project-name-group"><span class="project-title">기존 시스템 유지보수 및 기술 환경 개선</span><span class="project-subtitle">파일 처리·영상 변환 및 로깅·프레임워크 환경 개선</span></span><span class="project-date">2022.10 – 2024.10</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">미디어 처리 · 기술 환경 개선</span></div>
+    <p class="project-overview">기존 시스템에서 이미지·영상·PDF 처리 기능을 개선하고 운영 유지보수 및 기술 환경 개선 업무를 수행했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>이미지·영상·PDF 다중 첨부와 PDFBox·JCodec 기반 썸네일 생성</li><li>ffprobe를 통한 코덱 확인, FFmpeg를 통한 HEVC(H.265) 영상의 H.264 MP4 변환</li><li>마지막 수정 시간 기준 3시간 이상 경과한 임시파일 정리 로직 구현</li><li>Log4j 기반 로깅 환경을 SLF4J·Logback으로 변경하고 Lombok 적용</li><li>eGovFramework 3.x→4.0 단계적 마이그레이션 시 Maven 라이브러리 버전 조정·exclusions·설정 호환성 문제 대응</li><li>Node.js 기반 영상통화 서비스 유지보수 및 운영 데이터 변경 이력 관리용 DB 트리거 적용</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>미디어 기능 개선 직접 담당 · 기존 백엔드 초기 1인, 이후 인원 합류</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">eGovFramework</span><span class="tag">Maven</span><span class="tag">SLF4J</span><span class="tag">Logback</span><span class="tag">FFmpeg</span><span class="tag">ffprobe</span><span class="tag">Node.js</span></div><div class="case-context">연결된 기술 사례 <a href="#highlight-dependency">Maven 의존성 충돌 해결 ↗</a><a href="#highlight-video">영상 재생 호환성 개선 ↗</a></div></aside></div>
+    <p class="project-caveat"><strong>적용 범위:</strong> 프레임워크 마이그레이션 결과물은 최종 운영 환경에 반영되지 않았습니다.</p>
+  </div>
+</details></div></div>
+<div class="company-group"><div class="company-heading"><div><span class="company-caption">PROFESSIONAL EXPERIENCE</span><h3>한살림사업연합</h3></div><p>2019.10 – 2022.04<span class="company-role">Full-stack Developer</span></p></div><div class="project-list"><details class="project-accordion" id="project-erp" >
+  <summary><span class="project-number">05</span><span class="project-name-group"><span class="project-title">조합원 ERP 시스템 개발 및 운영</span><span class="project-subtitle">조합원·결제·CMS·자금관리 업무 기능과 백오피스</span></span><span class="project-date">2019.10 – 2022.04</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">ERP · Oracle SQL</span></div>
+    <p class="project-overview">조합원 정보, 결제, 정기 CMS, 포인트·쿠폰 및 자금관리 업무를 처리하는 ERP 시스템의 API와 운영 화면을 개발·유지보수했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>조합원 가입·탈퇴, 결제·정기 CMS 및 자금관리 관련 Java/Spring API와 JSP 화면 개발</li><li>요구사항 분석부터 설계·개발·테스트·배포까지 수행</li><li>iBatis 동적 SQL과 Oracle 복합 조회 쿼리 작성 및 현업 요청 데이터 추출</li><li>JENNIFER APM X-View와 로그를 통한 오류·지연 트랜잭션 원인 분석 및 대응</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>초기 부담당, 이후 주담당으로 전환 (일부 기능 공동 담당)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring Framework</span><span class="tag">Oracle</span><span class="tag">iBatis</span><span class="tag">JSP</span><span class="tag">JavaScript</span><span class="tag">JENNIFER APM</span></div></aside></div>
     
-        <!-- Resume Card -->
-        <div class="bg-white rounded-3xl px-8 py-8 md:px-10 md:py-9
-                    shadow-sm border border-stone-100">
+  </div>
+</details>
+<details class="project-accordion" id="project-pg" >
+  <summary><span class="project-number">06</span><span class="project-name-group"><span class="project-title">차세대 결제(PG) 시스템 전환</span><span class="project-subtitle">신규 PG사 규격에 맞춘 API 연동, 데이터 매핑 및 전환 검증</span></span><span class="project-date">2019.10 – 2020.08</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">결제 API · 전환 QA</span></div>
+    <p class="project-overview">기존 PG사를 신규 PG사로 교체하는 과정에서 결제 데이터 매핑, API 연동, ERP 운영 화면 일부 개발과 정상·예외 시나리오 QA에 참여했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>기존·신규 PG사 간 결제 데이터 및 요청·응답 항목 매핑</li><li>빌링키·가상계좌 발급·입금 통보·결제 승인·취소 API 연동</li><li>ERP 결제 내역 조회·확인용 운영 화면 일부 수정·개발</li><li>정상·예외 시나리오 QA, 가상계좌 초과·부족 입금 검증 및 점검시간 전환 참여</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>전체 프로젝트 약 20% (PG API·결제 데이터 매핑·ERP 화면 일부 개발·QA)</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring Framework</span><span class="tag">Oracle</span><span class="tag">iBatis</span><span class="tag">JSP</span><span class="tag">JavaScript</span><span class="tag">Jenkins</span></div></aside></div>
     
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+  </div>
+</details>
+<details class="project-accordion" id="project-store" >
+  <summary><span class="project-number">07</span><span class="project-name-group"><span class="project-title">자사 쇼핑몰(장보기) 운영 시스템 개선</span><span class="project-subtitle">회원가입 프로세스 개선과 주문·회원 관련 운영 문의 대응</span></span><span class="project-date">2019.10 – 2020.08</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="project-detail">
+    <div class="project-meta"><span class="project-type">회원가입 · 운영 개선</span></div>
+    <p class="project-overview">온라인 쇼핑몰 ‘장보기’ 회원가입 기능을 개선하고 주문·회원 영역의 운영 오류 분석 및 유지보수를 수행했습니다.</p>
+    <div class="project-columns"><div><h4>담당 업무 및 구현</h4><ul><li>JSP·JavaScript와 Java/Spring 기반 회원가입 화면 및 서버 로직 수정·개발</li><li>약관 동의와 아이디·이메일 중복 확인 기능 개선</li><li>주문·회원 관련 운영 문의와 담당 기능 수정</li><li>JENNIFER APM X-View와 로그로 오류·지연 트랜잭션 분석 및 대응</li></ul></div><aside class="project-aside"><h4>담당 범위</h4><p>쇼핑몰 운영 부담당 · 회원가입 개선 기능 직접 개발</p><h4>기술 스택</h4><div class="tag-list"><span class="tag">Java</span><span class="tag">Spring Framework</span><span class="tag">Oracle</span><span class="tag">iBatis</span><span class="tag">JSP</span><span class="tag">JavaScript</span><span class="tag">jQuery</span></div></aside></div>
     
-                <div>
-                    <h3 class="text-xl md:text-2xl font-bold text-stone-800 tracking-tight">
-                        경력과 프로젝트를 한눈에 정리했습니다.
-                    </h3>
-    
-                    <p class="text-stone-500 mt-2 leading-relaxed">
-                        주요 경력과 기술 경험은 웹 이력서에서 확인할 수 있습니다.
-                    </p>
-                </div>
-    
-                <a href="./resume/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="group inline-flex items-center justify-center gap-2
-                          px-5 py-3 rounded-xl
-                          border border-stone-200
-                          text-stone-700 font-medium
-                          hover:border-orange-200 hover:text-orange-800 hover:bg-orange-50/40
-                          transition-colors shrink-0">
-                    이력서 보기
-                    <span class="transition-transform group-hover:translate-x-0.5">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<footer class="bg-stone-800 text-stone-400 py-8 border-t border-stone-800 mt-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <p>&copy; 2026 Sangnim Choi. All rights reserved.</p>
-        <div class="flex gap-4">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-white transition-colors">↑ 최상단으로 이동</button>
-        </div>
-    </div>
-</footer>
-
-<script>
-    function scrollToSection(id) {
-        const element = document.getElementById(id);
-        const navHeight = 64;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - navHeight;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
+  </div>
+</details></div></div>
+    </div></section>
+    <section class="section section-tinted" id="tech" aria-labelledby="tech-title"><div class="container">
+      <div class="section-header"><span class="section-kicker">03 / TECH STACK</span><h2 class="section-title" id="tech-title">실무에서 사용한 기술</h2><p class="section-description">기술 목록은 실무 활용 경험을 기준으로 구성했습니다.</p></div>
+      <div class="tech-grid">
+        <div class="tech-card"><h3>Backend</h3><p>Java · Spring Framework · eGovFramework · REST API</p></div>
+        <div class="tech-card"><h3>Database / Persistence</h3><p>Oracle · MSSQL · MyBatis · iBatis · 동적 SQL</p></div>
+        <div class="tech-card"><h3>Build / Operations</h3><p>Maven · Jenkins · GitLab · SVN · SLF4J · Logback · Lombok · JENNIFER APM</p></div>
+        <div class="tech-card"><h3>Frontend / Media / Other</h3><p>JSP · JavaScript · jQuery · FFmpeg · ffprobe · PDFBox · JCodec · Node.js(유지보수)</p></div>
+      </div><p class="tech-hint">Spring Boot·JPA 등 현재 학습 중인 기술은 실무 경험과 구분하여 이 목록에 포함하지 않았습니다.</p>
+    </div></section>
+    <section class="contact" id="contact" aria-labelledby="contact-title"><div class="container contact-layout"><div><span class="eyebrow">CONTACT / RESUME</span><h2 id="contact-title">더 자세한 경력을 확인해 보세요.</h2><p>프로젝트별 경력과 담당 업무는 웹이력서에서 볼 수 있습니다.</p></div><div class="contact-actions"><a class="btn btn-primary" href="./resume/">웹이력서 보기 ↗</a><a class="btn btn-ghost" href="https://github.com/lizziechoi-dev" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="btn btn-ghost" href="mailto:lizzychoi1119@gmail.com">이메일 ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-row"><span>© 2026 Sangnim Choi · Backend Developer</span><a href="#top">맨 위로 ↑</a></div></footer>
+  <script>
+    (function(){
+      const accordion=Array.from(document.querySelectorAll("details.project-accordion"));
+      document.getElementById("expand-all").addEventListener("click",function(){accordion.forEach(function(el){el.open=true;});});
+      document.getElementById("collapse-all").addEventListener("click",function(){accordion.forEach(function(el){el.open=false;});});
+      document.querySelectorAll("[data-open-project]").forEach(function(link){
+        link.addEventListener("click",function(){
+          const id=link.getAttribute("data-open-project");
+          const target=document.getElementById(id);
+          if(target)target.open=true;
         });
-    }
-
-    function switchCompany(companyId) {
-        // 1. 모든 회사 컨텐츠 숨기기
-        document.querySelectorAll('.company-content').forEach(el => {
-            el.style.display = 'none';
-        });
-        
-        // 2. 선택한 회사 컨텐츠만 보이기
-        const targetContent = document.getElementById('content-' + companyId);
-        if (targetContent) {
-            targetContent.style.display = 'block';
-        }
-
-        // 3. 모든 탭 버튼 스타일 초기화
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            const title = btn.querySelector('.title-text');
-            const date = btn.querySelector('.date-text');
-            const indicator = btn.querySelector('.tab-indicator');
-
-            title.classList.remove('text-orange-900');
-            title.classList.add('text-stone-300');
-            
-            date.classList.remove('text-stone-500');
-            date.classList.add('text-stone-300');
-            
-            indicator.classList.remove('opacity-100');
-            indicator.classList.add('opacity-0');
-        });
-
-        // 4. 선택된 탭 스타일 활성화
-        const activeBtn = document.getElementById('btn-' + companyId);
-        if (activeBtn) {
-            const activeTitle = activeBtn.querySelector('.title-text');
-            const activeDate = activeBtn.querySelector('.date-text');
-            const activeIndicator = activeBtn.querySelector('.tab-indicator');
-
-            activeTitle.classList.remove('text-stone-300');
-            activeTitle.classList.add('text-orange-900');
-            
-            activeDate.classList.remove('text-stone-300');
-            activeDate.classList.add('text-stone-500');
-            
-            activeIndicator.classList.remove('opacity-0');
-            activeIndicator.classList.add('opacity-100');
-        }
-    }
-
-    function toggleAccordion(id) {
-        const content = document.getElementById(id);
-        const arrow = content.previousElementSibling.querySelector('.acc-arrow');
-        const isOpen = content.classList.contains('open');
-
-        // 다른 아코디언 닫기
-        document.querySelectorAll('.acc-content').forEach(el => el.classList.remove('open'));
-        document.querySelectorAll('.acc-arrow').forEach(el => el.style.transform = 'rotate(0deg)');
-
-        if (!isOpen) {
-            content.classList.add('open');
-            arrow.style.transform = 'rotate(180deg)';
-        }
-    }
-
-</script>
+      });
+      if(location.hash){
+        const initial=document.getElementById(location.hash.slice(1));
+        if(initial&&initial.matches("details.project-accordion"))initial.open=true;
+      }
+    }());
+  </script>
 </body>
 </html>
