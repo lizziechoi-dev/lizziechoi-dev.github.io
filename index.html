@@ -49,8 +49,7 @@
     .section-header{margin-bottom:30px}
     .case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
     .case-card{background:white;border:1px solid #d5e5e3;border-radius:14px;padding:24px;box-shadow:0 5px 24px #153f4710;display:flex;flex-direction:column;scroll-margin-top:100px}
-    .case-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-    .case-number{font-size:11px;font-weight:900;letter-spacing:1.2px;color:var(--teal)}
+    .case-top{display:flex;justify-content:flex-start;gap:10px;align-items:center}
     .case-project{font-size:11px;color:#768b94}
     .case-card h3{font-size:19px;letter-spacing:-.6px;line-height:1.5;margin:14px 0 15px}
     .case-body{display:grid;gap:15px}
@@ -61,8 +60,7 @@
     .projects-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
     .company-group{margin-top:44px}
     .company-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:17px;border-bottom:2px solid var(--deep);padding-bottom:14px}
-    .company-heading h3{font-size:22px;letter-spacing:-.7px;line-height:1.4;margin:4px 0 0}
-    .company-caption{font-size:10px;font-weight:850;letter-spacing:1px;color:var(--teal)}
+    .company-heading h3{font-size:22px;letter-spacing:-.7px;line-height:1.4;margin:0}
     .company-heading p{font-size:12px;color:var(--muted);margin:0;text-align:right}
     .company-role{display:block;font-weight:700}
     .project-list{display:grid;gap:10px}
@@ -141,31 +139,31 @@
     <section class="section section-tinted" id="highlights" aria-labelledby="highlights-title"><div class="container">
       <div class="section-header"><span class="section-kicker">01 / ENGINEERING HIGHLIGHTS</span><h2 class="section-title" id="highlights-title">핵심 기술 구현 및 문제 해결 사례</h2><p class="section-description">기술 이름만 나열하는 대신, 어떤 상황에서 무엇을 구현하고 개선했는지 정리했습니다. 사례를 선택하면 해당 실무 프로젝트가 펼쳐집니다.</p></div>
       <div class="case-grid"><article class="case-card" id="highlight-concurrency">
-  <div class="case-top"><span class="case-number">CASE 01</span><span class="case-project">직캠 관리 앱</span></div>
+  <div class="case-top"><span class="case-project">직캠 관리 앱</span></div>
   <h3>동일 장비의 중복 대여 방지</h3>
   <div class="case-body"><p><strong>상황</strong><span>대여 가능 여부를 먼저 조회한 뒤 상태를 변경하는 방식이라면, 두 요청이 동시에 같은 장비를 '대여 가능'으로 판단할 위험이 있습니다.</span></p><p><strong>해결 방법</strong><span>대여 가능한 상태인 경우에만 변경하도록 UPDATE의 WHERE 조건을 구성했습니다. UPDATE 영향 행 수가 1이면 성공, 0이면 대여 실패로 판단해 요청 결과를 구분했습니다.</span></p><p><strong>결과</strong><span>경쟁하는 대여 요청 중 실제로 상태 변경에 성공한 요청만 대여 처리하도록 구현했습니다.</span></p></div>
   <a class="deep-link" href="#project-camera" data-open-project="project-camera">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
 </article>
 <article class="case-card" id="highlight-hierarchy">
-  <div class="case-top"><span class="case-number">CASE 02</span><span class="case-project">와트매니저2</span></div>
+  <div class="case-top"><span class="case-project">와트매니저2</span></div>
   <h3>계층형 체크리스트 관계 유지</h3>
   <div class="case-body"><p><strong>상황</strong><span>상위·하위 항목이 연결된 체크리스트 템플릿을 복제할 때 PK가 새로 생성됩니다. 기존 부모 ID를 그대로 사용하면 복제된 항목들의 계층 관계가 어긋날 수 있었습니다.</span></p><p><strong>해결 방법</strong><span>복제 과정에서 기존 ID와 신규 PK의 대응 관계를 관리했습니다. 이 매핑을 사용해 하위 항목의 부모 참조를 복제된 상위 항목의 신규 PK로 연결했습니다.</span></p><p><strong>결과</strong><span>템플릿을 복사하더라도 부모·자식 관계를 유지하는 기능을 구현했습니다.</span></p></div>
   <a class="deep-link" href="#project-manager" data-open-project="project-manager">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
 </article>
 <article class="case-card" id="highlight-dependency">
-  <div class="case-top"><span class="case-number">CASE 03</span><span class="case-project">기존 시스템 기술 환경</span></div>
+  <div class="case-top"><span class="case-project">기존 시스템 기술 환경</span></div>
   <h3>Maven 의존성 충돌 해결</h3>
   <div class="case-body"><p><strong>상황</strong><span>eGovFramework 3.x에서 4.0으로 단계적으로 올리는 과정에서 라이브러리 버전 충돌과 설정 파일 호환성 문제가 발생했습니다.</span></p><p><strong>해결 방법</strong><span>Maven 의존성 버전을 조정하고 exclusions를 적용해 충돌하는 라이브러리를 제외했습니다. 단계별 업그레이드 과정에서 설정 파일 호환성도 확인하며 문제에 대응했습니다.</span></p><p><strong>결과</strong><span>마이그레이션 작업 중 발생한 의존성·설정 문제를 해결했습니다. 다만 결과물은 최종 운영 환경에 반영되지 않았습니다.</span></p></div>
   <a class="deep-link" href="#project-maintenance" data-open-project="project-maintenance">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
 </article>
 <article class="case-card" id="highlight-video">
-  <div class="case-top"><span class="case-number">CASE 04</span><span class="case-project">기존 시스템 미디어 처리</span></div>
+  <div class="case-top"><span class="case-project">기존 시스템 미디어 처리</span></div>
   <h3>영상 재생 호환성 개선</h3>
   <div class="case-body"><p><strong>상황</strong><span>기존 첨부 기능을 영상까지 확장하는 과정에서 HEVC(H.265) 코덱 영상의 웹 재생 호환성을 고려해야 했습니다.</span></p><p><strong>해결 방법</strong><span>ffprobe로 업로드된 영상의 코덱을 판별하고, 변환이 필요한 경우 FFmpeg를 이용해 H.264 MP4 형식으로 변환하는 처리를 구현했습니다.</span></p><p><strong>결과</strong><span>웹 환경에서 재생 가능한 형식으로 변환하는 기능을 제공해 영상 호환성 문제에 대응했습니다.</span></p></div>
   <a class="deep-link" href="#project-maintenance" data-open-project="project-maintenance">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
 </article>
 <article class="case-card" id="highlight-education">
-  <div class="case-top"><span class="case-number">CASE 05</span><span class="case-project">출입 신청 시스템</span></div>
+  <div class="case-top"><span class="case-project">출입 신청 시스템</span></div>
   <h3>서버 기준 안전교육 이수 판정</h3>
   <div class="case-body"><p><strong>상황</strong><span>안전교육 이수 가능 시각을 사용자의 기기 시간으로 판단하면 기기별 시간 차이나 임의 변경으로 판정 기준이 달라질 수 있습니다.</span></p><p><strong>해결 방법</strong><span>클라이언트 시간에 의존하지 않도록 서버 기준으로 이수 가능 시각을 계산하고 저장한 뒤, 이후 요청 시 현재 서버 시간과 비교해 이수 여부를 검증했습니다.</span></p><p><strong>결과</strong><span>안전교육 이수 여부를 일관된 서버 시간 기준으로 처리하는 업무 로직을 구현했습니다.</span></p></div>
   <a class="deep-link" href="#project-access" data-open-project="project-access">관련 프로젝트 펼쳐보기 <span aria-hidden="true">↗</span></a>
@@ -173,7 +171,7 @@
     </div></section>
     <section class="section" id="projects" aria-labelledby="projects-title"><div class="container">
       <div class="section-header projects-intro"><div><span class="section-kicker">02 / PROFESSIONAL PROJECTS</span><h2 class="section-title" id="projects-title">실무 프로젝트 7개</h2><p class="section-description">회사별로 묶고, 프로젝트 시작일 기준 최신순으로 배치했습니다. 제목을 눌러 담당 업무와 구현 내용을 펼쳐보세요.</p></div></div>
-      <div class="company-group"><div class="company-heading"><div><span class="company-caption">PROFESSIONAL EXPERIENCE</span><h3>㈜와트</h3></div><p>2022.10 – 2024.10<span class="company-role">Backend Developer</span></p></div><div class="project-list"><details class="project-accordion" id="project-camera" open>
+      <div class="company-group"><div class="company-heading"><div><h3>㈜와트</h3></div><p>2022.10 – 2024.10<span class="company-role">Backend Developer</span></p></div><div class="project-list"><details class="project-accordion" id="project-camera" open>
   <summary><span class="project-number">01</span><span class="project-name-group"><span class="project-title">직캠 관리 앱 신규 백엔드 개발</span><span class="project-subtitle">장비 대여·반납과 작업허가서 데이터를 제공하는 신규 앱의 백엔드</span></span><span class="project-date">2023.05 – 2024.10</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
   <div class="project-detail">
     <div class="project-meta"><span class="project-type">동시 요청 · 장비 관리</span><span class="project-note">고도화 기간 포함</span></div>
@@ -209,7 +207,7 @@
     <p class="project-caveat"><strong>적용 범위:</strong> 프레임워크 마이그레이션 결과물은 최종 운영 환경에 반영되지 않았습니다.</p>
   </div>
 </details></div></div>
-<div class="company-group"><div class="company-heading"><div><span class="company-caption">PROFESSIONAL EXPERIENCE</span><h3>한살림사업연합</h3></div><p>2019.10 – 2022.04<span class="company-role">Full-stack Developer</span></p></div><div class="project-list"><details class="project-accordion" id="project-erp" >
+<div class="company-group"><div class="company-heading"><div><h3>한살림사업연합</h3></div><p>2019.10 – 2022.04<span class="company-role">Full-stack Developer</span></p></div><div class="project-list"><details class="project-accordion" id="project-erp" >
   <summary><span class="project-number">05</span><span class="project-name-group"><span class="project-title">조합원 ERP 시스템 개발 및 운영</span><span class="project-subtitle">조합원·결제·CMS·자금관리 업무 기능과 백오피스</span></span><span class="project-date">2019.10 – 2022.04</span><span class="project-chevron" aria-hidden="true">⌄</span></summary>
   <div class="project-detail">
     <div class="project-meta"><span class="project-type">ERP · Oracle SQL</span></div>
